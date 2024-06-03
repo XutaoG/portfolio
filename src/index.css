@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.anonymous-pro {
+	font-family: "Anonymous Pro", monospace;
+}
+
+.ibm-plex-mono {
+	font-family: "IBM Plex Mono", monospace;
+}
+
+.crimson-text {
+	font-family: "Crimson Text", serif;
+}
+
+.playfair-display {
+	font-family: "Playfair Display", serif;
+}
+
+.poppins {
+	font-family: "Poppins", sans-serif;
+}
