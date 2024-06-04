@@ -1,28 +1,18 @@
-import classNames from "classnames";
 import NavigationBar from "./components/NavigationBar";
 import { useAppSelector } from "./hooks";
-import { twMerge } from "tailwind-merge";
 import AboutMePage from "./pages/AboutMePage";
 import ScrollBar from "./components/ScrollBar";
 
 function App() {
-	const darkMode = useAppSelector((state) => state.system.darkMode);
-
-	const backgroundStyle = twMerge(
-		classNames("bg-white", {
-			"bg-neutral-700": darkMode,
-		})
-	);
-
-	const textStyles = twMerge(
-		classNames("text-black", {
-			"text-white": darkMode,
-		})
-	);
+	const darkMode = useAppSelector((state) => state.system.darkMode)
+		? "dark"
+		: "";
 
 	return (
 		<div
-			className={`h-dvh flex flex-col gap-4 p-4 pb-0 ${backgroundStyle} ${textStyles}`}
+			className={`${darkMode} h-dvh flex flex-col gap-4 p-4 pb-0 
+			bg-white dark:bg-neutral-700 text-black dark:text-white 
+			transition-colors duration-1000`}
 		>
 			<NavigationBar />
 			<div className="grow flex">

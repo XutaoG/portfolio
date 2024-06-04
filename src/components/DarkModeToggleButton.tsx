@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { toggleDarkMode } from "../store/slices/systemSlice";
 
-const DisplayModeToggleButton = () => {
+const DarkModeToggleButton = () => {
 	const darkMode = useAppSelector((state) => state.system.darkMode);
 	const dispatch = useAppDispatch();
 
@@ -39,4 +39,4 @@ const DisplayModeToggleButton = () => {
 	);
 };
 
-export default DisplayModeToggleButton;
+export default DarkModeToggleButton;

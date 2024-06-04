@@ -1,7 +1,4 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import { useAppSelector } from "../hooks";
-import { twMerge } from "tailwind-merge";
-import classNames from "classnames";
 import pic1 from "../assets/photo-images/pic1.jpg";
 import pic2 from "../assets/photo-images/pic2.jpg";
 import pic3 from "../assets/photo-images/pic3.jpg";
@@ -9,14 +6,6 @@ import pic4 from "../assets/photo-images/pic4.jpg";
 import { useState } from "react";
 
 const PhotoShuffler = () => {
-	const darkMode = useAppSelector((state) => state.system.darkMode);
-
-	const buttonStyle = twMerge(
-		classNames("bg-neutral-300 hover:bg-neutral-400", {
-			"bg-neutral-500 hover:bg-neutral-600": darkMode,
-		})
-	);
-
 	const [photoIndex, setPhotoIndex] = useState(0);
 
 	const photos = [pic1, pic2, pic3, pic4];
@@ -38,13 +27,15 @@ const PhotoShuffler = () => {
 			{/* Change photo buttons */}
 			<div className="absolute inset-0 flex justify-between items-center px-1">
 				<button
-					className={`flex justify-center items-center p-1 rounded-full ${buttonStyle}`}
+					className="flex justify-center items-center p-1 rounded-full
+					bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-500 dark:hover:bg-neutral-600"
 					onClick={prevPhoto}
 				>
 					<MdKeyboardArrowLeft className="text-2xl" />
 				</button>
 				<button
-					className={`flex justify-center items-center p-1 rounded-full ${buttonStyle}`}
+					className="flex justify-center items-center p-1 rounded-full
+					bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-500 dark:hover:bg-neutral-600"
 					onClick={nextPhoto}
 				>
 					<MdKeyboardArrowRight className="text-2xl" />

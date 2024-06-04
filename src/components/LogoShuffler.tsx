@@ -19,6 +19,7 @@ const LogoShuffler = ({ className }: logoShufflerProps) => {
 		classNames("w-8 aspect-square cursor-pointer", className)
 	);
 
+	// * Shuffle logo images
 	const changeImage = () => {
 		setImageIndex((val) => (val + 1) % images.length);
 	};
