@@ -9,7 +9,6 @@ interface buttonProps extends ComponentPropsWithoutRef<"button"> {
 	className?: string;
 	rounded?: boolean;
 	fill?: boolean;
-	dark?: boolean;
 	large?: boolean;
 	fixedWidth?: boolean;
 	navStyle?: boolean;
@@ -28,11 +27,11 @@ const Button = ({
 	selected,
 	...rest
 }: buttonProps) => {
-	const displayMode = useAppSelector((state) => state.system.displayMode);
+	const darkMode = useAppSelector((state) => state.system.darkMode);
 
-	const styles = twMerge(
+	const buttonStyles = twMerge(
 		classNames(
-			"bg-neutral-100 py-0.5 px-2 border border-neutral-400 rounded-md anonymous-pro text-inherit",
+			"bg-neutral-100 py-0.5 px-2 border border-neutral-400 rounded-md anonymous-pro",
 			"hover:bg-neutral-200",
 			textFont,
 			{
@@ -40,17 +39,19 @@ const Button = ({
 				"self-stretch": fill,
 				"px-3 py-1 text-lg": large,
 				"w-32": fixedWidth,
-				"bg-transparent border-0": navStyle,
+				"bg-transparent border-0 font-medium": navStyle,
 				"bg-neutral-300 hover:bg-neutral-300 cursor-default": selected,
-				"border-0 hover:bg-neutral-600": displayMode,
-				"bg-neutral-700 hover:bg-neutral-700": selected && displayMode,
+				"bg-neutral-500 border-0 hover:bg-neutral-600": darkMode,
+				"bg-transparent border-0 hover:bg-neutral-600":
+					darkMode && navStyle,
+				"bg-neutral-700 hover:bg-neutral-700": selected && darkMode,
 			},
 			className
 		)
 	);
 
 	return (
-		<button className={styles} {...rest}>
+		<button className={buttonStyles} {...rest}>
 			{text}
 		</button>
 	);

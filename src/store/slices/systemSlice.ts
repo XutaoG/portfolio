@@ -1,20 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: {
-	displayMode: boolean;
+	darkMode: boolean;
 } = {
-	displayMode: false,
+	darkMode: false,
 };
 
 const systemSlice = createSlice({
 	name: "system",
 	initialState,
 	reducers: {
-		toggleDisplayMode: (state, action: PayloadAction<boolean>) => {
-			state.displayMode = action.payload;
+		toggleDarkMode: (state, action: PayloadAction<boolean>) => {
+			state.darkMode = action.payload;
 		},
 	},
 });
 
 export const systemSliceReducer = systemSlice.reducer;
-export const { toggleDisplayMode } = systemSlice.actions;
+export const { toggleDarkMode } = systemSlice.actions;

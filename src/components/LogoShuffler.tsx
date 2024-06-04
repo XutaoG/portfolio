@@ -16,7 +16,7 @@ const LogoShuffler = ({ className }: logoShufflerProps) => {
 	const [imageIndex, setImageIndex] = useState(0);
 
 	const styles = twMerge(
-		classNames("w-10 aspect-square cursor-pointer", className)
+		classNames("w-8 aspect-square cursor-pointer", className)
 	);
 
 	const changeImage = () => {

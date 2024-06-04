@@ -1,16 +1,10 @@
-import classNames from "classnames";
-import { twMerge } from "tailwind-merge";
 import Button from "./Button";
 import DisplayModeToggleButton from "./DisplayModeToggleButton";
 import { useAppSelector } from "../hooks";
 import LogoShuffler from "./LogoShuffler";
 
-interface navigationBarProps {
-	className?: string;
-}
-
-const NavigationBar = ({ className }: navigationBarProps) => {
-	const displayMode = useAppSelector((state) => state.system.displayMode);
+const NavigationBar = () => {
+	const darkMode = useAppSelector((state) => state.system.darkMode);
 
 	const selectedNavIndex = 0;
 	const navigations = [
@@ -45,34 +39,22 @@ const NavigationBar = ({ className }: navigationBarProps) => {
 		);
 	});
 
-	const styles = twMerge(classNames("flex gap-2.5", className));
-
-	const logoStyles = twMerge(
-		classNames(
-			"bg-white border border-neutral-400 rounded-lg flex p-0.5 pr-2 gap-2 items-center",
-			{
-				"bg-neutral-800 border-0": displayMode,
-			}
-		)
-	);
-
-	const barStyles = twMerge(
-		classNames(
-			"grow bg-white border border-neutral-400 rounded-lg flex justify-between",
-			{
-				"bg-neutral-800 border-0": displayMode,
-			}
-		)
-	);
+	const colorStyles = darkMode
+		? "bg-neutral-800 border-0"
+		: "bg-white border border-neutral-400";
 
 	return (
-		<div className={styles}>
-			<div className={logoStyles}>
+		<div className="flex gap-2.5">
+			<div
+				className={`rounded-lg flex p-0.5 pr-2 gap-2 items-center ${colorStyles}`}
+			>
 				<LogoShuffler className="grow" />
-				<p className="poppins font-medium text-inherit">XUTAOGAO</p>
+				<p className="playfair-display text-inherit">XUTAO GAO</p>
 			</div>
-			<div className={barStyles}>
-				<div className="p-1 flex">{renderedNavigationButtons}</div>
+			<div
+				className={`grow rounded-lg flex justify-between ${colorStyles}`}
+			>
+				<div className="p-1 flex">{renderedNavigationButtons} </div>
 				<div className="p-1 pr-2 flex items-center">
 					<DisplayModeToggleButton />
 				</div>
