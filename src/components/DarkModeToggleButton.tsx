@@ -11,12 +11,12 @@ const DarkModeToggleButton = () => {
 	};
 
 	return (
-		<div className="flex gap-2 items-center">
+		<div className="flex gap-2.5 items-center">
 			<p className="poppins font-medium">Light</p>
 			<button
 				className="w-10 bg-gradient-to-r from-blue-700 to-purple-700
 				flex justify-start items-center rounded-full p-1
-				"
+				hover:scale-125 transition-transform duration-300"
 				onClick={onToggleClick}
 			>
 				<div

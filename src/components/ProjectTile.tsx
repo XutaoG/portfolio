@@ -1,13 +1,23 @@
+import { twMerge } from "tailwind-merge";
 import Button from "./Button";
+import classNames from "classnames";
 
 interface projectTileProps {
-	height: number;
+	size: number;
 }
 
-const ProjectTile = ({ height }: projectTileProps) => {
+const ProjectTile = ({ size }: projectTileProps) => {
+	const height = twMerge(
+		classNames({
+			"h-[500px]": size === 1,
+			"h-[600px]": size === 2,
+			"h-[700px]": size === 3,
+		})
+	);
+
 	return (
 		<div
-			className={`flex flex-col min-w-[450px] max-w-[550px] h-[${height}px] cursor-pointer
+			className={`${height} flex flex-col min-w-[450px] max-w-[550px] cursor-pointer
 			p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-800
 			hover:scale-[1.03] transition-transform duration-300`}
 		>

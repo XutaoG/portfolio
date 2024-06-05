@@ -26,12 +26,13 @@ const NavButton = ({
 		classNames(
 			"py-0.5 px-2 rounded-md border-0 anonymous-pro font-medium",
 			"bg-transparent hover:bg-neutral-200 dark:hover:bg-neutral-600",
+			"hover:scale-[1.1] transition-transform duration-300",
 			textFont,
 			{
 				"rounded-full": rounded,
 				"self-stretch": fill,
 				"w-32": fixedWidth,
-				"bg-neutral-300 hover:bg-neutral-300 cursor-default dark:bg-neutral-700 dark:hover:bg-neutral-700":
+				"bg-neutral-300 hover:bg-neutral-300 cursor-default dark:bg-neutral-700 dark:hover:bg-neutral-700 hover:scale-100":
 					selected,
 			},
 			className

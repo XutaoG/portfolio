@@ -1,25 +1,8 @@
-import { twMerge } from "tailwind-merge";
 import Button from "../components/Button";
 import { MdLocationOn, MdSchool, MdCalendarMonth } from "react-icons/md";
-import classNames from "classnames";
-import { useAppSelector } from "../hooks";
 import PhotoShuffler from "../components/PhotoShuffler";
 
 const AboutMePage = () => {
-	const darkMode = useAppSelector((state) => state.system.darkMode);
-
-	const nameColor = twMerge(
-		classNames("text-black", {
-			"text-sky-200": darkMode,
-		})
-	);
-
-	const secondaryInfoContainerStyles = twMerge(
-		classNames("bg-neutral-200 border border-neutral-300 rounded-lg", {
-			"border-0 bg-neutral-800": darkMode,
-		})
-	);
-
 	return (
 		<div className="flex flex-col gap-5">
 			<div className="flex gap-5">
@@ -32,7 +15,9 @@ const AboutMePage = () => {
 					</p>
 					<div className="flex flex-col">
 						<p className="anonymous-pro text-3xl">Hi, I'm</p>
-						<p className={`playfair-display text-6xl ${nameColor}`}>
+						<p
+							className={`playfair-display text-6xl text-black dark:text-sky-200`}
+						>
 							XUTAO GAO
 						</p>
 					</div>
@@ -61,7 +46,8 @@ const AboutMePage = () => {
 			</div>
 			{/* Secondary information */}
 			<div
-				className={`flex justify-between items-center p-3 text-sm poppins ${secondaryInfoContainerStyles}`}
+				className={`flex justify-between items-center p-3 text-sm poppins
+				bg-neutral-200 border border-neutral-300 rounded-lg dark:border-0 dark:bg-neutral-800`}
 			>
 				<div className="flex gap-1 items-center">
 					<MdLocationOn className="text-xl" />
