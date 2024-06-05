@@ -1,35 +1,45 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import DarkModeToggleButton from "./DarkModeToggleButton";
 import LogoShuffler from "./LogoShuffler";
-import NavButton from "./NavButton";
+import NavigationButton from "./NavigationButton";
 
 const NavigationBar = () => {
-	const selectedNavIndex = 0;
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	const navigations = [
-		{ name: "About Me" },
-		{ name: "Projects" },
-		{ name: "Resume" },
-		{ name: "Contact Me" },
+		{ name: "About Me", destination: "/" },
+		{ name: "Projects", destination: "/projects" },
+		{ name: "Resume", destination: "/resume" },
+		{ name: "Contact Me", destination: "/contact" },
 	];
 
 	// * Render all navigation buttons
 	const renderedNavigationButtons = navigations.map((nav, index) => {
-		if (selectedNavIndex === index) {
+		if (nav.destination === location.pathname) {
 			return (
-				<NavButton
+				<NavigationButton
 					key={index}
 					text={nav.name}
 					textFont="poppins"
 					fixedWidth
 					selected
+					disabled
+					onClick={() => {
+						navigate(nav.destination);
+					}}
 				/>
 			);
 		}
 		return (
-			<NavButton
+			<NavigationButton
 				key={index}
 				text={nav.name}
 				textFont="poppins"
 				fixedWidth
+				onClick={() => {
+					navigate(nav.destination);
+				}}
 			/>
 		);
 	});

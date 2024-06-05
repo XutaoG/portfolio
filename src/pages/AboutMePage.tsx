@@ -4,7 +4,7 @@ import PhotoShuffler from "../components/PhotoShuffler";
 
 const AboutMePage = () => {
 	return (
-		<div className="flex flex-col gap-5">
+		<div className="flex flex-col justify-center gap-5">
 			<div className="flex gap-5">
 				{/* Picture */}
 				<PhotoShuffler />

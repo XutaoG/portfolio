@@ -1,28 +1,42 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import ScrollNotch from "./ScrollNotch";
 
 const ScrollBar = () => {
-	const selectedNavIndex = 0;
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	const navigations = [
-		{ name: "About Me" },
-		{ name: "Projects" },
-		{ name: "Resume" },
-		{ name: "Contact Me" },
+		{ name: "About Me", destination: "/" },
+		{ name: "Projects", destination: "/projects" },
+		{ name: "Resume", destination: "/resume" },
+		{ name: "Contact Me", destination: "/contact" },
 	];
 
 	// * Render scroll bar notches
 	const renderedNotches = navigations.map((nav, index) => {
-		if (selectedNavIndex === index) {
+		if (nav.destination === location.pathname) {
 			return (
 				<ScrollNotch
 					key={index}
-					selected
 					text={nav.name}
 					textFont="anonymous-pro"
+					selected
+					disabled
+					onClick={() => {
+						navigate(nav.destination);
+					}}
 				/>
 			);
 		}
 		return (
-			<ScrollNotch key={index} text={nav.name} textFont="anonymous-pro" />
+			<ScrollNotch
+				key={index}
+				text={nav.name}
+				textFont="anonymous-pro"
+				onClick={() => {
+					navigate(nav.destination);
+				}}
+			/>
 		);
 	});
 

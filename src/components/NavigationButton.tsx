@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { ComponentPropsWithoutRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface navButtonProps extends ComponentPropsWithoutRef<"button"> {
+interface navigationButtonProps extends ComponentPropsWithoutRef<"button"> {
 	text?: string;
 	textFont?: string;
 	className?: string;
@@ -12,7 +12,7 @@ interface navButtonProps extends ComponentPropsWithoutRef<"button"> {
 	selected?: boolean;
 }
 
-const NavButton = ({
+const NavigationButton = ({
 	text,
 	textFont,
 	className,
@@ -21,7 +21,7 @@ const NavButton = ({
 	fixedWidth,
 	selected,
 	...rest
-}: navButtonProps) => {
+}: navigationButtonProps) => {
 	const buttonStyles = twMerge(
 		classNames(
 			"py-0.5 px-2 rounded-md border-0 anonymous-pro font-medium",
@@ -46,4 +46,4 @@ const NavButton = ({
 	);
 };
 
-export default NavButton;
+export default NavigationButton;
