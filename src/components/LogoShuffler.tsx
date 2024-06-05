@@ -29,6 +29,7 @@ const LogoShuffler = ({ className }: logoShufflerProps) => {
 			<img
 				className="rounded-md object-contain"
 				src={images[imageIndex]}
+				alt="logo shuffle images"
 			/>
 		</button>
 	);

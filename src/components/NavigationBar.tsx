@@ -1,6 +1,6 @@
-import Button from "./Button";
 import DarkModeToggleButton from "./DarkModeToggleButton";
 import LogoShuffler from "./LogoShuffler";
+import NavButton from "./NavButton";
 
 const NavigationBar = () => {
 	const selectedNavIndex = 0;
@@ -15,23 +15,21 @@ const NavigationBar = () => {
 	const renderedNavigationButtons = navigations.map((nav, index) => {
 		if (selectedNavIndex === index) {
 			return (
-				<Button
+				<NavButton
 					key={index}
 					text={nav.name}
 					textFont="poppins"
 					fixedWidth
-					navStyle
 					selected
 				/>
 			);
 		}
 		return (
-			<Button
+			<NavButton
 				key={index}
 				text={nav.name}
 				textFont="poppins"
 				fixedWidth
-				navStyle
 			/>
 		);
 	});
@@ -43,7 +41,7 @@ const NavigationBar = () => {
 				bg-white border border-neutral-400 dark:bg-neutral-800 dark:border-0"
 			>
 				<LogoShuffler className="grow" />
-				<p className="playfair-display text-inherit">XUTAO GAO</p>
+				<p className="playfair-display">XUTAO GAO</p>
 			</div>
 			<div
 				className="grow rounded-lg flex justify-between ${colorStyles}

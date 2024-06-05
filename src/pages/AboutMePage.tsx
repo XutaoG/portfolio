@@ -45,8 +45,8 @@ const AboutMePage = () => {
 					</p>
 					<div className="flex flex-col gap-1 items-center">
 						<div className="flex gap-2 items-center">
-							<div className="w-1.5 aspect-square bg-green-600 rounded-full"></div>
-							<p className="poppins text-green-600">
+							<div className="w-1.5 aspect-square bg-green-700 rounded-full"></div>
+							<p className="poppins text-green-700">
 								Available for Work
 							</p>
 						</div>

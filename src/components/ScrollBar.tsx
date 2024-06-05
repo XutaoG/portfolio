@@ -27,7 +27,7 @@ const ScrollBar = () => {
 	});
 
 	return (
-		<div className="w-[3px] h-3/5 flex flex-col justify-between items-center bg-black dark:bg-white">
+		<div className="w-[3px] h-[60dvh] flex flex-col justify-between items-center bg-black dark:bg-white">
 			<div className="w-2.5 h-2.5 rounded-full bg-black dark:bg-white"></div>
 			{renderedNotches}
 			<div className="w-2.5 h-2.5 rounded-full bg-black dark:bg-white"></div>

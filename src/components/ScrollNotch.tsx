@@ -18,7 +18,7 @@ const ScrollNotch = ({
 	const notchStyles = twMerge(
 		classNames({
 			"scale-150 cursor-default": selected,
-			"hover:scale-125": !selected,
+			"hover:scale-150 transition-transform duration-300": !selected,
 		})
 	);
 

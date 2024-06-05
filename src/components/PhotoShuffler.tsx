@@ -23,19 +23,22 @@ const PhotoShuffler = () => {
 			{/* <img
 				className="rounded-lg h-full w-full absolute inset-0 object-cover"
 				src={photos[photoIndex]}
+				alt="Xutao's photos"
 			/> */}
 			{/* Change photo buttons */}
-			<div className="absolute inset-0 flex justify-between items-center px-1">
+			<div className="absolute inset-0 flex justify-between items-center px-1.5">
 				<button
 					className="flex justify-center items-center p-1 rounded-full
-					bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-500 dark:hover:bg-neutral-600"
+					bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-500 dark:hover:bg-neutral-600
+					hover:scale-125 transition-transform duration-300 ease-in-out"
 					onClick={prevPhoto}
 				>
 					<MdKeyboardArrowLeft className="text-2xl" />
 				</button>
 				<button
 					className="flex justify-center items-center p-1 rounded-full
-					bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-500 dark:hover:bg-neutral-600"
+					bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-500 dark:hover:bg-neutral-600
+					hover:scale-125 transition-transform duration-300 ease-in-out"
 					onClick={nextPhoto}
 				>
 					<MdKeyboardArrowRight className="text-2xl" />
