@@ -4,7 +4,7 @@ const ResumePage = () => {
 	return (
 		<div className="flex justify-center items-center gap-8">
 			{/* Info */}
-			<div className="w-96 flex flex-col justify-center gap-6 ">
+			<div className="w-96 flex flex-col justify-center gap-6">
 				<p className="playfair-display text-5xl leading-snug">
 					Experience and Qualitifications
 				</p>
