@@ -22,6 +22,9 @@ export default {
 				"secondary-dark-2":
 					"rgb(var(--color-secondary-dark-2) / <alpha-value>)",
 			},
+			transitionProperty: {
+				"navigation-button": "transform, background-color",
+			},
 		},
 	},
 	plugins: [],

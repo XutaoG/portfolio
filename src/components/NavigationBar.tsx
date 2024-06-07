@@ -57,7 +57,9 @@ const NavigationBar = () => {
 				className="grow rounded-lg flex justify-between ${colorStyles}
 				bg-white border border-neutral-400 dark:bg-neutral-800 dark:border-0"
 			>
-				<div className="p-1 flex">{renderedNavigationButtons} </div>
+				<div className="p-1 flex gap-2">
+					{renderedNavigationButtons}{" "}
+				</div>
 				<div className="p-1 pr-2 flex items-center">
 					<DarkModeToggleButton />
 				</div>

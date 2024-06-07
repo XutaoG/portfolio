@@ -10,7 +10,7 @@ const Root = () => {
 		: "";
 	return (
 		<div
-			className={`${darkMode} min-h-dvh flex flex-col gap-4 p-4 pb-0 
+			className={`${darkMode} min-h-dvh flex flex-col gap-4 p-4 pb-0
 			bg-white dark:bg-neutral-700 text-black dark:text-white 
 			transition-colors duration-300`}
 		>

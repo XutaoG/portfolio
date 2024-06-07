@@ -26,7 +26,7 @@ const NavigationButton = ({
 		classNames(
 			"py-0.5 px-2 rounded-md border-0 anonymous-pro font-medium",
 			"bg-transparent hover:bg-neutral-200 dark:hover:bg-neutral-600",
-			"hover:scale-[1.1] transition-transform duration-300",
+			"hover:scale-[1.1] transition-navigation-button duration-300",
 			textFont,
 			{
 				"rounded-full": rounded,
