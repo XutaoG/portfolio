@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
 import ProjectTile from "../components/ProjectTile";
+import ProjectModalView from "../components/ProjectModalView";
 
 const ProjectsPage = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -16,7 +17,9 @@ const ProjectsPage = () => {
 	return (
 		<div className="flex justify-center gap-2">
 			{/* Modal */}
-			<Modal show={showModal} onClose={handleCloseModal}></Modal>
+			<Modal show={showModal} onClose={handleCloseModal}>
+				<ProjectModalView />
+			</Modal>
 			{/* Projects */}
 			<div className="flex flex-col gap-3" onClick={handleOpenModal}>
 				<ProjectTile size={1} />

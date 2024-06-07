@@ -1,8 +1,24 @@
+import { useState } from "react";
 import Button from "../components/Button";
+import Modal from "../components/Modal";
+import ResumeModalView from "../components/ResumeModalView";
 
 const ResumePage = () => {
+	const [showModal, setShowModal] = useState(false);
+
+	const handleOpenModal = () => {
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setShowModal(false);
+	};
 	return (
 		<div className="flex justify-center items-center gap-8">
+			{/* Modal */}
+			<Modal show={showModal} onClose={handleCloseModal}>
+				<ResumeModalView />
+			</Modal>
 			{/* Info */}
 			<div className="w-96 flex flex-col justify-center gap-6">
 				<p className="playfair-display text-5xl leading-snug">
@@ -21,7 +37,12 @@ const ResumePage = () => {
 				</p>
 				<div className="flex gap-4">
 					<Button text="/download" textFont="ibm-plex-mono" fill />
-					<Button text="/view" textFont="ibm-plex-mono" fill />
+					<Button
+						text="/view"
+						textFont="ibm-plex-mono"
+						fill
+						onClick={handleOpenModal}
+					/>
 				</div>
 				<p className="ibm-plex-mono self-end">Last Updated: 6/24</p>
 			</div>

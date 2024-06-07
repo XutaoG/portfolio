@@ -21,15 +21,16 @@ const Modal = ({ show, children, onClose }: modalProps) => {
 	}, []);
 
 	return createPortal(
-		<div className={`${display}`}>
+		<div
+			className={`fixed inset-0 ${display} flex justify-center items-center`}
+		>
+			{/* Background */}
 			<div
 				className="fixed inset-0 bg-black opacity-60"
 				onClick={onClose}
 			></div>
-			<div
-				className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-				bg-white flex flex-col p-4 gap-4 rounded-md"
-			>
+			{/* Content */}
+			<div className="bg-white flex flex-col p-4 pb-8 gap-4 rounded-md z-50">
 				{/* Close modal button */}
 				<button
 					className="flex gap-1 items-center self-start"
