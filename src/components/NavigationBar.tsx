@@ -1,11 +1,22 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import DarkModeToggleButton from "./DarkModeToggleButton";
 import LogoShuffler from "./LogoShuffler";
 import NavigationButton from "./NavigationButton";
+import SettingsDropdown from "./SettingsDropdown";
+import { toggleDarkMode } from "../store/slices/systemSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import ToggleButton from "./ToggleButton";
 
 const NavigationBar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
+
+	const darkMode = useAppSelector((state) => state.system.darkMode);
+	const dispatch = useAppDispatch();
+
+	// ! Switch between light and dark mode
+	const onColorModeChange = () => {
+		dispatch(toggleDarkMode(!darkMode));
+	};
 
 	const navigations = [
 		{ name: "About Me", destination: "/" },
@@ -58,10 +69,17 @@ const NavigationBar = () => {
 				bg-white border border-neutral-400 dark:bg-neutral-800 dark:border-0"
 			>
 				<div className="p-1 flex gap-2">
-					{renderedNavigationButtons}{" "}
+					{renderedNavigationButtons}
 				</div>
-				<div className="p-1 pr-2 flex items-center">
-					<DarkModeToggleButton />
+				<div className="p-2 flex items-center gap-4">
+					<SettingsDropdown />
+					<div className="self-stretch w-0.5 bg-black dark:bg-white" />
+					<ToggleButton
+						offText="Light"
+						onText="Dark"
+						onToggleClick={onColorModeChange}
+						mode={darkMode}
+					/>
 				</div>
 			</div>
 		</div>

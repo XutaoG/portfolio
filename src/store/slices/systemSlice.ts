@@ -2,8 +2,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: {
 	darkMode: boolean;
+	canvasMode: boolean;
 } = {
 	darkMode: false,
+	canvasMode: true,
 };
 
 const systemSlice = createSlice({
@@ -13,8 +15,12 @@ const systemSlice = createSlice({
 		toggleDarkMode: (state, action: PayloadAction<boolean>) => {
 			state.darkMode = action.payload;
 		},
+
+		toggleCanvasMode: (state, action: PayloadAction<boolean>) => {
+			state.canvasMode = action.payload;
+		},
 	},
 });
 
 export const systemSliceReducer = systemSlice.reducer;
-export const { toggleDarkMode } = systemSlice.actions;
+export const { toggleDarkMode, toggleCanvasMode } = systemSlice.actions;

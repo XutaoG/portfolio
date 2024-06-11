@@ -6,18 +6,17 @@ import { MdArrowDownward } from "react-icons/md";
 import BackgroundCanvas from "../components/BackgroundCanvas";
 
 const Root = () => {
-	const darkMode = useAppSelector((state) => state.system.darkMode)
-		? "dark"
-		: "";
+	const darkMode = useAppSelector((state) => state.system.darkMode);
 
 	return (
 		<div
-			className={`${darkMode} min-h-dvh flex flex-col gap-4 p-4 pb-0
+			className={`
+				${darkMode ? "dark" : ""} min-h-dvh flex flex-col gap-4 p-4 pb-0
 				text-black dark:text-white 
 				transition-colors duration-300`}
 		>
 			<div className="-z-50">
-				<BackgroundCanvas dark={!(darkMode.length === 0)} />
+				<BackgroundCanvas dark={darkMode} />
 			</div>
 			<NavigationBar />
 			<div className="grow flex">

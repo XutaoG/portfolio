@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useAppSelector } from "../hooks";
 
 // * Utility: Calculate distance squared of 2 points
 const distancesq = (x1: number, y1: number, x2: number, y2: number) => {
@@ -7,11 +8,12 @@ const distancesq = (x1: number, y1: number, x2: number, y2: number) => {
 
 // * Stores all points on canvas
 const points: Point[] = [];
-let canvasRendered: boolean = false;
+let canvasRendered = false;
+let animateOn = false;
 
 // ! Config
-const radiusFactor = 10;
-const spaceFactor = 8;
+const radius = 500;
+const spaceBetweenPoints = 200;
 const speedRange = 0.03;
 const startingSpeed = 0.05;
 
@@ -32,7 +34,7 @@ class Point {
 	private active: boolean;
 	private size: number;
 
-	opacity: number;
+	private opacity: number;
 
 	private directionX: number;
 	private directionY: number;
@@ -45,14 +47,13 @@ class Point {
 	constructor(
 		public x: number,
 		public y: number,
-		private canvas: HTMLCanvasElement,
 		private context: CanvasRenderingContext2D,
 		private tracker: Tracker
 	) {
 		this.originalX = x;
 		this.originalY = y;
 
-		this.radius = (canvas.width / spaceFactor) * radiusFactor;
+		this.radius = radius;
 		this.active = true;
 
 		this.size = Math.random() * 4 + 5;
@@ -73,16 +74,16 @@ class Point {
 
 		// * Change direction of point when it hits a boundary
 		if (
-			this.x >= this.originalX + this.canvas.width / spaceFactor / 8 ||
-			this.x < this.originalX - this.canvas.width / spaceFactor / 8
+			this.x >= this.originalX + spaceBetweenPoints / 4 ||
+			this.x < this.originalX - spaceBetweenPoints / 4
 		) {
 			this.speedX = Math.random() * speedRange + startingSpeed;
 			this.directionX *= -1;
 		}
 
 		if (
-			this.y >= this.originalY + this.canvas.height / spaceFactor / 8 ||
-			this.y < this.originalY - this.canvas.height / spaceFactor / 8
+			this.y >= this.originalY + spaceBetweenPoints / 4 ||
+			this.y < this.originalY - spaceBetweenPoints / 4
 		) {
 			this.speedY = Math.random() * speedRange + startingSpeed;
 			this.directionY *= -1;
@@ -106,13 +107,13 @@ class Point {
 		// * Set new opacity
 		this.opacity = startingOpacity;
 		if (distance <= Math.pow(200, 2)) {
-			this.opacity -= 0.025;
+			this.opacity -= 0.01;
 		}
 		if (distance <= Math.pow(100, 2)) {
-			this.opacity -= 0.025;
+			this.opacity -= 0.01;
 		}
 		if (distance <= Math.pow(50, 2)) {
-			this.opacity -= 0.025;
+			this.opacity -= 0.01;
 		}
 
 		// * Perform update
@@ -130,7 +131,7 @@ class Point {
 
 		for (const point of points) {
 			if (point !== this && point.active) {
-				if (closestPoints.length < 4) {
+				if (closestPoints.length < 3) {
 					// * Push new closest point
 					closestPoints.push(point);
 				} else {
@@ -188,26 +189,27 @@ class Point {
 		} else {
 			this.context.fillStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${this.opacity})`;
 		}
-		this.context.beginPath();
-		this.context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-		this.context.fill();
+		// this.context.beginPath();
+		// this.context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+		// this.context.fill();
 	};
 
 	drawLineTo = (point: Point) => {
-		const lineOpacity =
-			this.opacity > point.opacity ? this.opacity : point.opacity;
-
 		this.context.beginPath();
 		this.context.moveTo(this.x, this.y);
 		this.context.lineTo(point.x, point.y);
 
 		if (darkMode) {
-			this.context.strokeStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${lineOpacity})`;
+			this.context.strokeStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${this.opacity})`;
 		} else {
-			this.context.strokeStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${lineOpacity})`;
+			this.context.strokeStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${this.opacity})`;
 		}
 
 		this.context.stroke();
+	};
+
+	setNewContext = (context: CanvasRenderingContext2D) => {
+		this.context = context;
 	};
 }
 
@@ -220,8 +222,8 @@ class Tracker {
 		private velocityY: number,
 		private canvas: HTMLCanvasElement
 	) {
-		this.x = canvas.width / 3;
-		this.y = canvas.height / 3;
+		this.x = Math.random() * canvas.width;
+		this.y = Math.random() * canvas.height;
 	}
 
 	update = () => {
@@ -252,20 +254,21 @@ interface backgroundCanvasProps {
 }
 
 const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
+	const canvasMode = useAppSelector((state) => state.system.canvasMode);
+
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	darkMode = dark;
+	animateOn = canvasMode;
 
 	useEffect(() => {
 		if (canvasRef.current) {
 			const canvas = canvasRef.current;
 			const context = canvas!.getContext("2d");
 
-			if (context === null || canvasRendered) {
+			// * If context do not exist or
+			if (context === null) {
 				return;
 			}
-
-			// * Set color mode
-			canvasRendered = true;
 
 			// * Initialize tracker
 			const tracker = new Tracker(
@@ -274,54 +277,69 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 				canvas
 			);
 
-			// * Resize canvas whenever window is resized
-			const resize = () => {
-				canvas.width = window.innerWidth;
-				canvas.height = window.innerHeight;
-			};
-			resize();
-			window.addEventListener("resize", resize);
-
-			// * Populates all points
-			for (
-				let x = -canvas.width / spaceFactor;
-				x < canvas.width + canvas.width / spaceFactor;
-				x += canvas.width / spaceFactor
-			) {
-				for (
-					let y = -canvas.height / spaceFactor;
-					y < canvas.height + canvas.height / spaceFactor;
-					y += canvas.height / spaceFactor
-				) {
-					const posX =
-						x + (Math.random() * canvas.width) / spaceFactor;
-					const posY =
-						y + (Math.random() * canvas.height) / spaceFactor;
-					points.push(
-						new Point(posX, posY, canvas, context, tracker)
-					);
-				}
-			}
-
-			// * Animate canvas
+			// * Funct to animate canvas
 			const animate = () => {
 				context.clearRect(0, 0, canvas.width, canvas.height);
 
 				tracker.update();
 
 				points.forEach((point) => point.update());
-				requestAnimationFrame(animate);
+
+				if (animateOn) {
+					requestAnimationFrame(animate);
+				}
 			};
 
-			animate();
+			// * Func to resize canvas whenever window is resized
+			const resize = () => {
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+			};
+
+			if (animateOn) {
+				// * Update all point context
+				points.forEach((point) => point.setNewContext(context));
+				resize();
+				animate();
+			}
+
+			// *  canvas has been rendered, do not rerender
+			if (canvasRendered) {
+				return;
+			}
+			canvasRendered = true;
+
+			resize();
+			window.addEventListener("resize", resize);
+
+			// * Populates all points
+			for (
+				let x = -spaceBetweenPoints / 2;
+				x < canvas.width + spaceBetweenPoints / 2;
+				x += spaceBetweenPoints
+			) {
+				for (
+					let y = -spaceBetweenPoints / 2;
+					y < canvas.height + spaceBetweenPoints / 2;
+					y += spaceBetweenPoints
+				) {
+					const posX = x + Math.random() * spaceBetweenPoints * 0.75;
+					const posY = y + Math.random() * spaceBetweenPoints * 0.75;
+					points.push(new Point(posX, posY, context, tracker));
+				}
+			}
 		}
 	});
 
 	return (
-		<canvas
-			className="fixed top-0 left-0 bg-transparent h-full w-full bg-white dark:bg-neutral-700"
-			ref={canvasRef}
-		/>
+		<div className="fixed top-0 left-0 h-full w-full bg-white dark:bg-neutral-700">
+			{canvasMode ? (
+				<canvas
+					className="bg-transparent h-full w-full"
+					ref={canvasRef}
+				/>
+			) : null}
+		</div>
 	);
 };
 
