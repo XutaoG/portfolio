@@ -3,17 +3,22 @@ import NavigationBar from "../components/NavigationBar";
 import { useAppSelector } from "../hooks";
 import ScrollBar from "../components/ScrollBar";
 import { MdArrowDownward } from "react-icons/md";
+import BackgroundCanvas from "../components/BackgroundCanvas";
 
 const Root = () => {
 	const darkMode = useAppSelector((state) => state.system.darkMode)
 		? "dark"
 		: "";
+
 	return (
 		<div
 			className={`${darkMode} min-h-dvh flex flex-col gap-4 p-4 pb-0
-			bg-white dark:bg-neutral-700 text-black dark:text-white 
-			transition-colors duration-300`}
+				text-black dark:text-white 
+				transition-colors duration-300`}
 		>
+			<div className="-z-50">
+				<BackgroundCanvas />
+			</div>
 			<NavigationBar />
 			<div className="grow flex">
 				{/* Content container */}
