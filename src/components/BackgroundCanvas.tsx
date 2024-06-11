@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 // * Utility: Calculate distance squared of 2 points
 const distancesq = (x1: number, y1: number, x2: number, y2: number) => {
@@ -7,17 +7,22 @@ const distancesq = (x1: number, y1: number, x2: number, y2: number) => {
 
 // * Stores all points on canvas
 const points: Point[] = [];
-
-// * Track mouse movement
-const mousePosition = { x: 0, y: 0 };
+let canvasRendered: boolean = false;
 
 // ! Config
-const radiusFactor = 2;
-const spaceFactor = 20;
-const speedRange = 0.1;
-const startingSpeed = 0.1;
+const radiusFactor = 10;
+const spaceFactor = 8;
+const speedRange = 0.03;
+const startingSpeed = 0.05;
+
 const trackerVelocityX = 0.25;
-const trackerVelocityY = 0.75;
+const trackerVelocityY = 0.25;
+
+// ! Cosmetic Config
+const startingOpacity = 0.2;
+const lightModeColor = { red: 24, green: 24, blue: 24 };
+const darkModeColor = { red: 220, green: 220, blue: 220 };
+let darkMode: boolean;
 
 class Point {
 	private originalX: number;
@@ -26,7 +31,8 @@ class Point {
 	private radius: number;
 	private active: boolean;
 	private size: number;
-	private lineOpacity: number;
+
+	opacity: number;
 
 	private directionX: number;
 	private directionY: number;
@@ -49,8 +55,8 @@ class Point {
 		this.radius = (canvas.width / spaceFactor) * radiusFactor;
 		this.active = true;
 
-		this.size = Math.random() * 5 + 2;
-		this.lineOpacity = 0.1;
+		this.size = Math.random() * 4 + 5;
+		this.opacity = startingOpacity;
 
 		this.directionX = Math.round(Math.random()) ? 1 : -1;
 		this.directionY = Math.round(Math.random()) ? 1 : -1;
@@ -67,32 +73,49 @@ class Point {
 
 		// * Change direction of point when it hits a boundary
 		if (
-			this.x >= this.originalX + this.canvas.width / spaceFactor / 2 ||
-			this.x < this.originalX - this.canvas.width / spaceFactor / 2
+			this.x >= this.originalX + this.canvas.width / spaceFactor / 8 ||
+			this.x < this.originalX - this.canvas.width / spaceFactor / 8
 		) {
 			this.speedX = Math.random() * speedRange + startingSpeed;
 			this.directionX *= -1;
 		}
 
 		if (
-			this.y >= this.originalY + this.canvas.height / spaceFactor / 2 ||
-			this.y < this.originalY - this.canvas.height / spaceFactor / 2
+			this.y >= this.originalY + this.canvas.height / spaceFactor / 8 ||
+			this.y < this.originalY - this.canvas.height / spaceFactor / 8
 		) {
 			this.speedY = Math.random() * speedRange + startingSpeed;
 			this.directionY *= -1;
 		}
 
-		// * Only display when hover mouse over
-		if (
-			distancesq(this.x, this.y, this.tracker.x, this.tracker.y) >
-			Math.pow(this.radius, 2)
-		) {
+		const distance = distancesq(
+			this.x,
+			this.y,
+			this.tracker.x,
+			this.tracker.y
+		);
+
+		// * Only display when near tracker radius
+		if (distance > Math.pow(this.radius, 2)) {
 			this.active = false;
 			return;
 		} else {
 			this.active = true;
 		}
 
+		// * Set new opacity
+		this.opacity = startingOpacity;
+		if (distance <= Math.pow(200, 2)) {
+			this.opacity -= 0.025;
+		}
+		if (distance <= Math.pow(100, 2)) {
+			this.opacity -= 0.025;
+		}
+		if (distance <= Math.pow(50, 2)) {
+			this.opacity -= 0.025;
+		}
+
+		// * Perform update
 		this.getClosestPoints();
 		this.drawLines();
 		this.draw();
@@ -160,68 +183,46 @@ class Point {
 
 	// * Draw points
 	draw = () => {
-		const distance = distancesq(
-			this.x,
-			this.y,
-			mousePosition.x,
-			mousePosition.y
-		);
-		if (distance <= Math.pow(200, 2)) {
-			this.lineOpacity = 0.1;
+		if (darkMode) {
+			this.context.fillStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${this.opacity})`;
+		} else {
+			this.context.fillStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${this.opacity})`;
 		}
-
-		if (distance <= Math.pow(100, 2)) {
-			this.lineOpacity = 0.15;
-		}
-
-		if (distance <= Math.pow(50, 2)) {
-			this.lineOpacity = 0.2;
-		}
-
-		this.context.fillStyle = `rgba(173, 233, 240, 0.8)`;
 		this.context.beginPath();
 		this.context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 		this.context.fill();
 	};
 
 	drawLineTo = (point: Point) => {
-		const distance = distancesq(
-			mousePosition.x,
-			mousePosition.y,
-			point.x,
-			point.y
-		);
-		let opacity = this.lineOpacity;
-
-		if (distance <= Math.pow(50, 2)) {
-			opacity -= 0.025;
-		}
-
-		if (distance <= Math.pow(100, 2)) {
-			opacity -= 0.025;
-		}
-
-		if (distance <= Math.pow(200, 2)) {
-			opacity -= 0.025;
-		}
+		const lineOpacity =
+			this.opacity > point.opacity ? this.opacity : point.opacity;
 
 		this.context.beginPath();
 		this.context.moveTo(this.x, this.y);
 		this.context.lineTo(point.x, point.y);
-		this.context.strokeStyle = `rgba(173, 233, 240, ${opacity})`;
+
+		if (darkMode) {
+			this.context.strokeStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${lineOpacity})`;
+		} else {
+			this.context.strokeStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${lineOpacity})`;
+		}
+
 		this.context.stroke();
 	};
 }
 
 class Tracker {
-	x = 100;
-	y = 100;
+	x: number;
+	y: number;
 
 	constructor(
 		private velocityX: number,
 		private velocityY: number,
 		private canvas: HTMLCanvasElement
-	) {}
+	) {
+		this.x = canvas.width / 3;
+		this.y = canvas.height / 3;
+	}
 
 	update = () => {
 		this.x += this.velocityX;
@@ -246,17 +247,25 @@ class Tracker {
 	};
 }
 
-const BackgroundCanvas = () => {
+interface backgroundCanvasProps {
+	dark: boolean;
+}
+
+const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+	darkMode = dark;
 
 	useEffect(() => {
 		if (canvasRef.current) {
 			const canvas = canvasRef.current;
 			const context = canvas!.getContext("2d");
 
-			if (context === null) {
+			if (context === null || canvasRendered) {
 				return;
 			}
+
+			// * Set color mode
+			canvasRendered = true;
 
 			// * Initialize tracker
 			const tracker = new Tracker(
@@ -300,37 +309,18 @@ const BackgroundCanvas = () => {
 
 				tracker.update();
 
-				// * Draw mouse position (To be removed)
-				context.fillStyle = `rgba(173, 233, 240, 0.5)`;
-				context.beginPath();
-				context.arc(
-					mousePosition.x,
-					mousePosition.y,
-					5,
-					0,
-					Math.PI * 2
-				);
-				context.fill();
-
 				points.forEach((point) => point.update());
 				requestAnimationFrame(animate);
 			};
 
 			animate();
 		}
-	}, []);
-
-	// * Update mouse position as cursor moves
-	const onCanvasMouseMove = (event: MouseEvent) => {
-		mousePosition.x = event.clientX;
-		mousePosition.y = event.clientY;
-	};
+	});
 
 	return (
 		<canvas
 			className="fixed top-0 left-0 bg-transparent h-full w-full bg-white dark:bg-neutral-700"
 			ref={canvasRef}
-			onMouseMove={onCanvasMouseMove}
 		/>
 	);
 };
