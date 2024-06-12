@@ -6,33 +6,13 @@ const distancesq = (x1: number, y1: number, x2: number, y2: number) => {
 	return Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2);
 };
 
-// * Stores all points on canvas
-const points: Point[] = [];
-let canvasRendered = false;
-let animateOn = false;
-
-// ! Config
-const radius = 500;
-const spaceBetweenPoints = 200;
-const speedRange = 0.03;
-const startingSpeed = 0.05;
-
-const trackerVelocityX = 0.25;
-const trackerVelocityY = 0.25;
-
-// ! Cosmetic Config
-const startingOpacity = 0.2;
-const lightModeColor = { red: 24, green: 24, blue: 24 };
-const darkModeColor = { red: 220, green: 220, blue: 220 };
-let darkMode: boolean;
-
 class Point {
 	private originalX: number;
 	private originalY: number;
 
 	private radius: number;
 	private active: boolean;
-	private size: number;
+	// private size: number;
 
 	private opacity: number;
 
@@ -56,7 +36,7 @@ class Point {
 		this.radius = radius;
 		this.active = true;
 
-		this.size = Math.random() * 4 + 5;
+		// this.size = Math.random() * 4 + 5;
 		this.opacity = startingOpacity;
 
 		this.directionX = Math.round(Math.random()) ? 1 : -1;
@@ -249,6 +229,27 @@ class Tracker {
 	};
 }
 
+// * Stores all points on canvas
+const points: Point[] = [];
+let tracker: Tracker | null = null;
+let canvasRendered = false;
+let animateOn = false;
+
+// ! Config
+const radius = 500;
+const spaceBetweenPoints = 200;
+const speedRange = 0.03;
+const startingSpeed = 0.05;
+
+const trackerVelocityX = 0.25;
+const trackerVelocityY = 0.25;
+
+// ! Cosmetic Config
+const startingOpacity = 0.2;
+const lightModeColor = { red: 24, green: 24, blue: 24 };
+const darkModeColor = { red: 220, green: 220, blue: 220 };
+let darkMode: boolean;
+
 interface backgroundCanvasProps {
 	dark: boolean;
 }
@@ -257,10 +258,16 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 	const canvasMode = useAppSelector((state) => state.system.canvasMode);
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
-	darkMode = dark;
-	animateOn = canvasMode;
 
 	useEffect(() => {
+		darkMode = dark;
+
+		let startAnimateAgain = false;
+		if (animateOn === false && canvasMode === true) {
+			startAnimateAgain = true;
+		}
+		animateOn = canvasMode;
+
 		if (canvasRef.current) {
 			const canvas = canvasRef.current;
 			const context = canvas!.getContext("2d");
@@ -270,18 +277,11 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 				return;
 			}
 
-			// * Initialize tracker
-			const tracker = new Tracker(
-				trackerVelocityX,
-				trackerVelocityY,
-				canvas
-			);
-
 			// * Funct to animate canvas
 			const animate = () => {
 				context.clearRect(0, 0, canvas.width, canvas.height);
 
-				tracker.update();
+				tracker?.update();
 
 				points.forEach((point) => point.update());
 
@@ -296,7 +296,7 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 				canvas.height = window.innerHeight;
 			};
 
-			if (animateOn) {
+			if (startAnimateAgain) {
 				// * Update all point context
 				points.forEach((point) => point.setNewContext(context));
 				resize();
@@ -308,6 +308,9 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 				return;
 			}
 			canvasRendered = true;
+
+			// * Initialize tracker
+			tracker = new Tracker(trackerVelocityX, trackerVelocityY, canvas);
 
 			resize();
 			window.addEventListener("resize", resize);
@@ -328,17 +331,19 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 					points.push(new Point(posX, posY, context, tracker));
 				}
 			}
+			resize();
+			animate();
 		}
 	});
 
 	return (
 		<div className="fixed top-0 left-0 h-full w-full bg-white dark:bg-neutral-700">
-			{canvasMode ? (
+			{/* {canvasMode ? (
 				<canvas
 					className="bg-transparent h-full w-full"
 					ref={canvasRef}
 				/>
-			) : null}
+			) : null} */}
 		</div>
 	);
 };
