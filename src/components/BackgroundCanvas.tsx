@@ -1,115 +1,85 @@
 import { useEffect, useRef } from "react";
 import { useAppSelector } from "../hooks";
 
-// * Utility: Calculate distance squared of 2 points
+// ! Utility
+//* Calculate distance squared of 2 points
 const distancesq = (x1: number, y1: number, x2: number, y2: number) => {
 	return Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2);
+};
+
+//* Calculate distance squared of 2 points
+const getRandomSpeed = () => {
+	return Math.random() * pointSpeed + pointSpeed * 2;
+};
+
+const getRandomDirection = () => {
+	return Math.round(Math.random()) ? 1 : -1;
 };
 
 class Point {
 	private originalX: number;
 	private originalY: number;
 
-	private radius: number;
 	private active: boolean;
-	// private size: number;
 
-	private opacity: number;
+	private velocityX: number;
+	private velocityY: number;
 
-	private directionX: number;
-	private directionY: number;
+	// * Tracks the closest points
+	closest: Point[];
 
-	private speedX: number;
-	private speedY: number;
-
-	private closest: Point[];
-
-	constructor(
-		public x: number,
-		public y: number,
-		private context: CanvasRenderingContext2D,
-		private tracker: Tracker
-	) {
+	constructor(public x: number, public y: number, public index: number) {
 		this.originalX = x;
 		this.originalY = y;
 
-		this.radius = radius;
-		this.active = true;
+		this.active = false;
 
-		// this.size = Math.random() * 4 + 5;
-		this.opacity = startingOpacity;
-
-		this.directionX = Math.round(Math.random()) ? 1 : -1;
-		this.directionY = Math.round(Math.random()) ? 1 : -1;
-
-		this.speedX = Math.random() * speedRange + startingSpeed;
-		this.speedY = Math.random() * speedRange + startingSpeed;
+		this.velocityX = getRandomSpeed() * getRandomDirection();
+		this.velocityY = getRandomSpeed() * getRandomDirection();
 
 		this.closest = [];
 	}
 
-	update = () => {
-		this.x += this.speedX * this.directionX;
-		this.y += this.speedY * this.directionY;
-
-		// * Change direction of point when it hits a boundary
-		if (
-			this.x >= this.originalX + spaceBetweenPoints / 4 ||
-			this.x < this.originalX - spaceBetweenPoints / 4
-		) {
-			this.speedX = Math.random() * speedRange + startingSpeed;
-			this.directionX *= -1;
-		}
-
-		if (
-			this.y >= this.originalY + spaceBetweenPoints / 4 ||
-			this.y < this.originalY - spaceBetweenPoints / 4
-		) {
-			this.speedY = Math.random() * speedRange + startingSpeed;
-			this.directionY *= -1;
-		}
-
-		const distance = distancesq(
-			this.x,
-			this.y,
-			this.tracker.x,
-			this.tracker.y
-		);
-
-		// * Only display when near tracker radius
-		if (distance > Math.pow(this.radius, 2)) {
+	update = (
+		context: CanvasRenderingContext2D,
+		trackerX: number,
+		trackerY: number,
+		darkMode: boolean
+	) => {
+		// * Only move and display when near tracker radius
+		const distance = distancesq(this.x, this.y, trackerX, trackerY);
+		if (distance > Math.pow(radius, 2)) {
 			this.active = false;
 			return;
 		} else {
 			this.active = true;
 		}
 
-		// * Set new opacity
-		this.opacity = startingOpacity;
-		if (distance <= Math.pow(200, 2)) {
-			this.opacity -= 0.01;
-		}
-		if (distance <= Math.pow(100, 2)) {
-			this.opacity -= 0.01;
-		}
-		if (distance <= Math.pow(50, 2)) {
-			this.opacity -= 0.01;
+		// * Move point position
+		this.x += this.velocityX;
+		this.y += this.velocityY;
+
+		// * Change direction of point when it hits a boundary
+		if (this.x >= this.originalX + spaceBetweenPoints / 5) {
+			this.velocityX = -getRandomSpeed();
+		} else if (this.x < this.originalX - spaceBetweenPoints / 5) {
+			this.velocityX = getRandomSpeed();
 		}
 
-		// * Perform update
+		if (this.y >= this.originalY + spaceBetweenPoints / 5) {
+			this.velocityY = -getRandomSpeed();
+		} else if (this.y < this.originalY - spaceBetweenPoints / 5) {
+			this.velocityY = getRandomSpeed();
+		}
+
 		this.getClosestPoints();
-		this.drawLines();
-		this.draw();
+		this.drawLines(context, darkMode);
 	};
 
 	getClosestPoints = () => {
-		if (!this.active) {
-			return;
-		}
+		const closestPoints: Point[] = [];
 
-		const closestPoints = [];
-
-		for (const point of points) {
+		points.forEach((point) => {
 			if (point !== this && point.active) {
 				if (closestPoints.length < 3) {
 					// * Push new closest point
@@ -118,13 +88,13 @@ class Point {
 					let farthestPointIndex = 0;
 
 					// * Update farthest point
-					for (let i = 1; i < closestPoints.length; i++) {
+					closestPoints.forEach((_, index) => {
 						if (
 							distancesq(
 								this.x,
 								this.y,
-								closestPoints[i].x,
-								closestPoints[i].y
+								closestPoints[index].x,
+								closestPoints[index].y
 							) >
 							distancesq(
 								this.x,
@@ -133,9 +103,9 @@ class Point {
 								closestPoints[farthestPointIndex].y
 							)
 						) {
-							farthestPointIndex = i;
+							farthestPointIndex = index;
 						}
-					}
+					});
 
 					if (
 						distancesq(this.x, this.y, point.x, point.y) <
@@ -150,46 +120,39 @@ class Point {
 					}
 				}
 			}
-		}
+		});
 
 		this.closest = [...closestPoints];
 	};
 
-	// * Draw all lines connected to the point
-	drawLines = () => {
+	// * Draw lines to closest points
+	drawLines = (context: CanvasRenderingContext2D, darkMode: boolean) => {
 		for (const point of this.closest) {
-			this.drawLineTo(point);
+			// * Check if the line has already been drawn
+			let hasDrawn = false;
+			for (const point2 of point.closest) {
+				if (point2.index === this.index) {
+					if (point.index < this.index) {
+						hasDrawn = true;
+						break;
+					}
+				}
+			}
+
+			if (!hasDrawn) {
+				context.beginPath();
+				context.moveTo(this.x, this.y);
+				context.lineTo(point.x, point.y);
+
+				if (darkMode) {
+					context.strokeStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${lineOpacity})`;
+				} else {
+					context.strokeStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${lineOpacity})`;
+				}
+
+				context.stroke();
+			}
 		}
-	};
-
-	// * Draw points
-	draw = () => {
-		if (darkMode) {
-			this.context.fillStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${this.opacity})`;
-		} else {
-			this.context.fillStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${this.opacity})`;
-		}
-		// this.context.beginPath();
-		// this.context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-		// this.context.fill();
-	};
-
-	drawLineTo = (point: Point) => {
-		this.context.beginPath();
-		this.context.moveTo(this.x, this.y);
-		this.context.lineTo(point.x, point.y);
-
-		if (darkMode) {
-			this.context.strokeStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${this.opacity})`;
-		} else {
-			this.context.strokeStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${this.opacity})`;
-		}
-
-		this.context.stroke();
-	};
-
-	setNewContext = (context: CanvasRenderingContext2D) => {
-		this.context = context;
 	};
 }
 
@@ -200,27 +163,28 @@ class Tracker {
 	constructor(
 		private velocityX: number,
 		private velocityY: number,
-		private canvas: HTMLCanvasElement
+		canvasWidth: number,
+		canvasHeight: number
 	) {
-		this.x = Math.random() * canvas.width;
-		this.y = Math.random() * canvas.height;
+		this.x = Math.random() * canvasWidth;
+		this.y = Math.random() * canvasHeight;
 	}
 
-	update = () => {
+	update = (canvasWidth: number, canvasHeight: number) => {
 		this.x += this.velocityX;
 		this.y += this.velocityY;
 
 		// * Change direction when it hits a boundary
-		if (this.x >= this.canvas.width) {
-			this.velocityX = Math.abs(this.velocityX) * -1;
+		if (this.x >= canvasWidth) {
+			this.velocityX = -Math.abs(this.velocityX);
 		}
 
 		if (this.x < 0) {
 			this.velocityX = Math.abs(this.velocityX);
 		}
 
-		if (this.y >= this.canvas.height) {
-			this.velocityY = Math.abs(this.velocityY) * -1;
+		if (this.y >= canvasHeight) {
+			this.velocityY = -Math.abs(this.velocityY);
 		}
 
 		if (this.y < 0) {
@@ -229,39 +193,68 @@ class Tracker {
 	};
 }
 
-// * Stores all points on canvas
+// * Resize canvas whenever window is resized
+const resize = (canvas: HTMLCanvasElement) => {
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+};
+
+const initialize = (canvas: HTMLCanvasElement) => {
+	// * Initialize tracker
+	tracker = new Tracker(
+		trackerVelocityX,
+		trackerVelocityY,
+		canvas.width,
+		canvas.height
+	);
+
+	// * Populates all points
+	let index = 0;
+	for (
+		let x = -spaceBetweenPoints / 2;
+		x < canvas.width + spaceBetweenPoints / 2;
+		x += spaceBetweenPoints
+	) {
+		for (
+			let y = -spaceBetweenPoints / 2;
+			y < canvas.height + spaceBetweenPoints / 2;
+			y += spaceBetweenPoints
+		) {
+			const posX = x + Math.random() * spaceBetweenPoints * 0.75;
+			const posY = y + Math.random() * spaceBetweenPoints * 0.75;
+			points.push(new Point(posX, posY, index));
+
+			index++;
+		}
+	}
+};
+
 const points: Point[] = [];
 let tracker: Tracker | null = null;
-let canvasRendered = false;
-let animateOn = false;
 
 // ! Config
-const radius = 500;
-const spaceBetweenPoints = 200;
-const speedRange = 0.03;
-const startingSpeed = 0.05;
+const radius = 750;
+const spaceBetweenPoints = 250;
+const pointSpeed = 0.02;
 
-const trackerVelocityX = 0.25;
-const trackerVelocityY = 0.25;
+const trackerVelocityX = 0.2;
+const trackerVelocityY = 0.2;
 
-// ! Cosmetic Config
-const startingOpacity = 0.2;
-const lightModeColor = { red: 24, green: 24, blue: 24 };
-const darkModeColor = { red: 220, green: 220, blue: 220 };
-let darkMode: boolean;
+const lineOpacity = 0.15;
+const lightModeColor = { red: 0, green: 0, blue: 0 };
+const darkModeColor = { red: 255, green: 255, blue: 255 };
 
-interface backgroundCanvasProps {
-	dark: boolean;
-}
+let canvasRendered = false;
+let animateOn = false;
+let dark = false;
 
-const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
+const BackgroundCanvas = () => {
 	const canvasMode = useAppSelector((state) => state.system.canvasMode);
+	dark = useAppSelector((state) => state.system.darkMode);
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
-		darkMode = dark;
-
 		let startAnimateAgain = false;
 		if (animateOn === false && canvasMode === true) {
 			startAnimateAgain = true;
@@ -272,7 +265,6 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 			const canvas = canvasRef.current;
 			const context = canvas!.getContext("2d");
 
-			// * If context do not exist or
 			if (context === null) {
 				return;
 			}
@@ -281,25 +273,19 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 			const animate = () => {
 				context.clearRect(0, 0, canvas.width, canvas.height);
 
-				tracker?.update();
+				tracker?.update(canvas.width, canvas.height);
 
-				points.forEach((point) => point.update());
+				points.forEach((point) =>
+					point.update(context, tracker!.x, tracker!.y, dark)
+				);
 
 				if (animateOn) {
 					requestAnimationFrame(animate);
 				}
 			};
 
-			// * Func to resize canvas whenever window is resized
-			const resize = () => {
-				canvas.width = window.innerWidth;
-				canvas.height = window.innerHeight;
-			};
-
 			if (startAnimateAgain) {
-				// * Update all point context
-				points.forEach((point) => point.setNewContext(context));
-				resize();
+				resize(canvas);
 				animate();
 			}
 
@@ -309,41 +295,22 @@ const BackgroundCanvas = ({ dark }: backgroundCanvasProps) => {
 			}
 			canvasRendered = true;
 
-			// * Initialize tracker
-			tracker = new Tracker(trackerVelocityX, trackerVelocityY, canvas);
-
-			resize();
-			window.addEventListener("resize", resize);
-
-			// * Populates all points
-			for (
-				let x = -spaceBetweenPoints / 2;
-				x < canvas.width + spaceBetweenPoints / 2;
-				x += spaceBetweenPoints
-			) {
-				for (
-					let y = -spaceBetweenPoints / 2;
-					y < canvas.height + spaceBetweenPoints / 2;
-					y += spaceBetweenPoints
-				) {
-					const posX = x + Math.random() * spaceBetweenPoints * 0.75;
-					const posY = y + Math.random() * spaceBetweenPoints * 0.75;
-					points.push(new Point(posX, posY, context, tracker));
-				}
-			}
-			resize();
-			animate();
+			// * Initialize canvas
+			window.addEventListener("resize", () => {
+				resize(canvas);
+			});
+			initialize(canvas);
 		}
 	});
 
 	return (
 		<div className="fixed top-0 left-0 h-full w-full bg-white dark:bg-neutral-700">
-			{/* {canvasMode ? (
+			{canvasMode ? (
 				<canvas
 					className="bg-transparent h-full w-full"
 					ref={canvasRef}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 };

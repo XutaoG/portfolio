@@ -16,7 +16,7 @@ const Root = () => {
 				transition-colors duration-300`}
 		>
 			<div className="-z-50">
-				<BackgroundCanvas dark={darkMode} />
+				<BackgroundCanvas />
 			</div>
 			<NavigationBar />
 			<div className="grow flex">
