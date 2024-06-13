@@ -19,7 +19,7 @@ const PhotoShuffler = () => {
 	};
 
 	return (
-		<div className="w-96 bg-white border border-neutral-400 rounded-lg relative">
+		<div className="size-full bg-white border border-neutral-400 rounded-lg relative">
 			{/* <img
 				className="rounded-lg h-full w-full absolute inset-0 object-cover"
 				src={photos[photoIndex]}
