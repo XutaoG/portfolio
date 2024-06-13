@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar";
 import { useAppSelector } from "../hooks";
 import ScrollBar from "../components/ScrollBar";
-import { MdArrowDownward } from "react-icons/md";
 import BackgroundCanvas from "../components/BackgroundCanvas";
+import NextPageButtonContainer from "../components/Reusable/NextPageButtonContainer";
 
 const Root = () => {
 	const darkMode = useAppSelector((state) => state.system.darkMode);
@@ -22,18 +22,11 @@ const Root = () => {
 			<div className="grow flex">
 				{/* Content container */}
 				<div className="grow flex flex-col">
-					<div className="grow flex justify-center">
+					<div className="grow container mx-auto flex justify-center">
 						<Outlet />
 					</div>
 					{/* Down arrow container */}
-					<div className="flex justify-center items-center pt-8 pb-16">
-						<button
-							className="bg-neutral-200 dark:bg-neutral-600
-							p-2 rounded-full animate-bounce"
-						>
-							<MdArrowDownward className="text-3xl" />
-						</button>
-					</div>
+					<NextPageButtonContainer />
 				</div>
 				{/* Scroll bar container */}
 				<div className="w-8 flex justify-center items-start relative">

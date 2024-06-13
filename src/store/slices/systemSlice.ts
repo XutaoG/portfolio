@@ -5,7 +5,7 @@ const initialState: {
 	canvasMode: boolean;
 } = {
 	darkMode: false,
-	canvasMode: true,
+	canvasMode: false,
 };
 
 const systemSlice = createSlice({
