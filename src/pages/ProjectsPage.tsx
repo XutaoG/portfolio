@@ -15,24 +15,24 @@ const ProjectsPage = () => {
 	};
 
 	return (
-		<div className="flex justify-center gap-2">
+		<div className="w-full flex flex-col gap-2 sm:grid sm:grid-cols-2 xl:grid-cols-3 content-center">
 			{/* Modal */}
 			<Modal show={showModal} onClose={handleCloseModal}>
 				<ProjectModalView />
 			</Modal>
 			{/* Projects */}
-			<div className="flex flex-col gap-3" onClick={handleOpenModal}>
-				<ProjectTile size={1} />
-				<ProjectTile size={2} />
-			</div>
-			<div className="flex flex-col gap-3">
-				<ProjectTile size={3} />
-				<ProjectTile size={1} />
-			</div>
-			<div className="flex flex-col gap-3">
-				<ProjectTile size={2} />
-				<ProjectTile size={1} />
-			</div>
+			{/* <div className="flex flex-col gap-2" onClick={handleOpenModal}> */}
+			<ProjectTile size={1} />
+			<ProjectTile size={1} />
+			{/* </div> */}
+			{/* <div className="flex flex-col gap-2"> */}
+			<ProjectTile size={1} />
+			<ProjectTile size={1} />
+			{/* </div> */}
+			{/* <div className="flex flex-col gap-2"> */}
+			<ProjectTile size={1} />
+			<ProjectTile size={1} />
+			{/* </div> */}
 		</div>
 	);
 };

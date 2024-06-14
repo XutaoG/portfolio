@@ -23,7 +23,7 @@ const ScrollBar = () => {
 				<ScrollNotch
 					key={index}
 					text={nav.name}
-					textFont="anonymous-pro"
+					textFont="poppins"
 					selected
 					onClick={() => {
 						navigate(nav.destination);
@@ -35,7 +35,7 @@ const ScrollBar = () => {
 			<ScrollNotch
 				key={index}
 				text={nav.name}
-				textFont="anonymous-pro"
+				textFont="poppins"
 				onClick={() => {
 					navigate(nav.destination);
 				}}
@@ -48,11 +48,11 @@ const ScrollBar = () => {
 			<div className="w-10 flex justify-center items-center relative">
 				<div
 					className="fixed top-1/2 -translate-y-1/2 w-[3px] h-[60dvh] 
-				flex flex-col justify-between items-center bg-black dark:bg-white"
+					flex flex-col justify-between items-center bg-neutral-600 dark:bg-white"
 				>
-					<div className="w-2.5 h-2.5 rounded-full bg-black dark:bg-white"></div>
+					<div className="w-2.5 h-2.5 rounded-full bg-inherit"></div>
 					{renderedNotches}
-					<div className="w-2.5 h-2.5 rounded-full bg-black dark:bg-white"></div>
+					<div className="w-2.5 h-2.5 rounded-full bg-inherit"></div>
 				</div>
 			</div>
 		)

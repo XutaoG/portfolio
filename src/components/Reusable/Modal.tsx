@@ -13,12 +13,14 @@ const Modal = ({ show, children, onClose }: modalProps) => {
 
 	// * Disable scrolling while modal is open
 	useEffect(() => {
-		document.body.classList.add("overflow-hidden");
+		if (show) {
+			document.body.classList.add("overflow-hidden");
+		}
 
 		return () => {
 			document.body.classList.remove("overflow-hidden");
 		};
-	}, []);
+	}, [show]);
 
 	return createPortal(
 		<div

@@ -17,8 +17,10 @@ const ScrollNotch = ({
 }: scrollNotchProps) => {
 	const notchStyles = twMerge(
 		classNames({
-			"scale-150 cursor-default": selected,
-			"hover:scale-150 transition-transform duration-300": !selected,
+			"scale-150 cursor-default bg-gradient-to-r from-blue-700 to-purple-700":
+				selected,
+			"hover:scale-150 transition-transform duration-300 bg-neutral-600 dark:bg-neutral-900":
+				!selected,
 		})
 	);
 
@@ -35,12 +37,12 @@ const ScrollNotch = ({
 	return (
 		<div className="relative">
 			<button
-				className={`rotate-45 p-1.5 bg-gradient-to-r from-blue-700 to-purple-700 ${notchStyles}`}
+				className={`rotate-45 p-1.5 ${notchStyles}`}
 				{...rest}
 				onMouseEnter={showLabel}
 				onMouseLeave={hideLabel}
 			>
-				<div className="w-2 h-2 bg-gradient-to-r from-blue-700 to-purple-700 border border-white" />
+				<div className="w-2 h-2 bg-inherit border border-white" />
 			</button>
 			{labelState ? (
 				<Label
