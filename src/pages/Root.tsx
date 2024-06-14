@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import NavigationBar from "../components/NavigationBar";
+import NavigationBar from "../components/Root/NavigationBar";
 import { useAppSelector } from "../hooks";
-import ScrollBar from "../components/ScrollBar";
-import BackgroundCanvas from "../components/BackgroundCanvas";
+import ScrollBar from "../components/Root/ScrollBar";
+import BackgroundCanvas from "../components/Root/BackgroundCanvas";
 import NextPageButtonContainer from "../components/Reusable/NextPageButtonContainer";
 
 const Root = () => {

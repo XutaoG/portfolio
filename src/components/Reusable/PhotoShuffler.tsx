@@ -1,8 +1,8 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import pic1 from "../assets/photo-images/pic1.jpg";
-import pic2 from "../assets/photo-images/pic2.jpg";
-import pic3 from "../assets/photo-images/pic3.jpg";
-import pic4 from "../assets/photo-images/pic4.jpg";
+import pic1 from "../../assets/photo-images/pic1.jpg";
+import pic2 from "../../assets/photo-images/pic2.jpg";
+import pic3 from "../../assets/photo-images/pic3.jpg";
+import pic4 from "../../assets/photo-images/pic4.jpg";
 import { useState } from "react";
 
 const PhotoShuffler = () => {

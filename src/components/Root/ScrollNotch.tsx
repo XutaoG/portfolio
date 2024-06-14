@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { twMerge } from "tailwind-merge";
-import Label from "./Label";
+import Label from "../Reusable/Label";
 import { ComponentPropsWithRef, useState } from "react";
 
 interface scrollNotchProps extends ComponentPropsWithRef<"button"> {

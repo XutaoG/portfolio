@@ -1,6 +1,6 @@
-import Button from "../components/Button";
-import Input from "../components/Input";
-import PhotoShuffler from "../components/PhotoShuffler";
+import Button from "../components/Reusable/Button";
+import Input from "../components/Reusable/Input";
+import PhotoShuffler from "../components/Reusable/PhotoShuffler";
 
 const ContactMePage = () => {
 	return (

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "../../hooks";
 
 // ! Utility
 //* Calculate distance squared of 2 points

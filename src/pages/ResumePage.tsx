@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import Modal from "../components/Modal";
-import ResumeModalView from "../components/ResumeModalView";
+import Button from "../components/Reusable/Button";
+import Modal from "../components/Reusable/Modal";
+import ResumeModalView from "../components/Resume/ResumeModalView";
 
 const ResumePage = () => {
 	const [showModal, setShowModal] = useState(false);

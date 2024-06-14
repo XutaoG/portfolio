@@ -1,8 +1,11 @@
 import { MdOutlineSettings } from "react-icons/md";
-import ToggleButton from "./ToggleButton";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { toggleCanvasMode, toggleDarkMode } from "../store/slices/systemSlice";
-import { useEffect, useRef, useState } from "react";
+import ToggleButton from "../Reusable/ToggleButton";
+import { useAppDispatch, useAppSelector, useOutsideClick } from "../../hooks";
+import {
+	toggleCanvasMode,
+	toggleDarkMode,
+} from "../../store/slices/systemSlice";
+import { useRef, useState } from "react";
 
 const SettingsDropdown = () => {
 	const canvasMode = useAppSelector((state) => state.system.canvasMode);
@@ -24,20 +27,9 @@ const SettingsDropdown = () => {
 
 	// ! Detect click outside of dropdown component
 	const dropdownRef = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				dropdownRef.current &&
-				!dropdownRef.current.contains(event.target as Node)
-			) {
-				// * Close dropdown once outside click is detected
-				setShowDropdown(false);
-			}
-		};
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
+	const dropdownToggleRef = useRef<HTMLButtonElement>(null);
+	useOutsideClick([dropdownRef, dropdownToggleRef], () => {
+		setShowDropdown(false);
 	});
 
 	const toggleDropdown = () => {
@@ -45,19 +37,22 @@ const SettingsDropdown = () => {
 	};
 
 	return (
-		<div className="relative" ref={dropdownRef}>
-			<div
-				className="bg-gradient-to-r from-blue-700 to-purple-700 text-white text-xl p-0.5 
-					rounded-md cursor-pointer hover:scale-125 transition-transform duration-300"
+		<div className="relative">
+			<button
+				className="h-full aspect-square flex justify-center items-center 
+					bg-gradient-to-r from-blue-700 to-purple-700 text-white text-2xl p-0.5 
+					rounded-md hover:scale-[1.1] transition-transform duration-300"
+				ref={dropdownToggleRef}
 				onClick={toggleDropdown}
 			>
 				<MdOutlineSettings />
-			</div>
+			</button>
 			{showDropdown && (
 				<div
-					className="absolute right-0 top-[175%] p-2 rounded-lg
-				border border-neutral-400 bg-white dark:bg-neutral-800 dark:border-0
-				flex flex-col gap-2"
+					className="absolute right-0 top-[125%] p-2 rounded-lg
+					border border-neutral-400 bg-white dark:bg-neutral-800 dark:border-0
+					flex flex-col gap-2"
+					ref={dropdownRef}
 				>
 					<p className="poppins text-sm">Background</p>
 					<ToggleButton

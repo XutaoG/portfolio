@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import Button from "./Button";
+import Button from "../Reusable/Button";
 import classNames from "classnames";
 
 interface projectTileProps {

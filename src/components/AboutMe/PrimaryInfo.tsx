@@ -1,4 +1,4 @@
-import Button from "../Button";
+import Button from "../Reusable/Button";
 
 const PrimaryInfo = () => {
 	return (

@@ -1,4 +1,4 @@
-import PhotoShuffler from "../components/PhotoShuffler";
+import PhotoShuffler from "../components/Reusable/PhotoShuffler";
 import SecondaryInfo from "../components/AboutMe/SecondaryInfo";
 import PrimaryInfo from "../components/AboutMe/PrimaryInfo";
 

@@ -5,7 +5,6 @@ import { twMerge } from "tailwind-merge";
 interface buttonProps extends ComponentPropsWithoutRef<"button"> {
 	text?: string;
 	textFont?: string;
-	className?: string;
 	rounded?: boolean;
 	fill?: boolean;
 	large?: boolean;
@@ -15,7 +14,6 @@ interface buttonProps extends ComponentPropsWithoutRef<"button"> {
 const Button = ({
 	text,
 	textFont,
-	className,
 	rounded,
 	fill,
 	large,
@@ -33,14 +31,13 @@ const Button = ({
 				"self-stretch grow basis-0": fill,
 				"px-3 py-1 text-lg hover:scale-[1.05]": large,
 				"w-32": fixedWidth,
-			},
-			className
+			}
 		)
 	);
 
 	return (
 		<button className={buttonStyles} {...rest}>
-			{text}
+			<p className="text-nowrap">{text}</p>
 		</button>
 	);
 };

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Modal from "../components/Modal";
-import ProjectTile from "../components/ProjectTile";
-import ProjectModalView from "../components/ProjectModalView";
+import Modal from "../components/Reusable/Modal";
+import ProjectTile from "../components/Projects/ProjectTile";
+import ProjectModalView from "../components/Projects/ProjectModalView";
 
 const ProjectsPage = () => {
 	const [showModal, setShowModal] = useState(false);

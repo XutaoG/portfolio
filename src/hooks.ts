@@ -1,27 +1,58 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useState } from "react";
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export { useAppDispatch, useAppSelector };
 
-function useOutsideAlerter(ref: RefObject<HTMLElement>) {
+const useBreakpointWidthCheck = (breakpoint: number) => {
+	const [width, setWidth] = useState(window.innerWidth);
+
 	useEffect(() => {
-		// * Alert if clicked on outside of element
-		function handleClickOutside(event: MouseEvent) {
-			if (ref.current && !ref.current.contains(event.target as Node)) {
-				alert("You clicked outside of me!");
+		const handleWindowResize = () => setWidth(window.innerWidth);
+		window.addEventListener("resize", handleWindowResize);
+		return () => window.removeEventListener("resize", handleWindowResize);
+	}, []);
+
+	return width >= breakpoint;
+};
+
+const useOutsideClick = (
+	ref: RefObject<HTMLElement> | RefObject<HTMLElement>[],
+	callback: () => void
+) => {
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			// ! If ref is an array
+			if (Array.isArray(ref)) {
+				let contains = false;
+				ref.forEach((el) => {
+					if (
+						el.current &&
+						el.current.contains(event.target as Node)
+					) {
+						contains = true;
+					}
+				});
+
+				if (!contains) {
+					callback();
+				}
+			} else if (
+				ref.current &&
+				!ref.current.contains(event.target as Node)
+			) {
+				// * Callback when outside click detected
+				callback();
 			}
-		}
-		// * Bind the event listener
+		};
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => {
-			// * Unbind the event listener on clean up
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	}, [ref]);
-}
+	});
+};
 
-export default useOutsideAlerter;
+export { useBreakpointWidthCheck, useOutsideClick };
