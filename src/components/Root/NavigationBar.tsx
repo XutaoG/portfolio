@@ -10,7 +10,7 @@ const NavigationBar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const navBarBreakPoint = 1024;
+	const navBarBreakPoint = 900;
 	const breakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
 
 	const [showMobileNavigation, setShowMobileNavigation] = useState(false);
@@ -97,7 +97,7 @@ const NavigationBar = () => {
 			{/* Display mobile navigation */}
 			{!breakpointCheck && showMobileNavigation && (
 				<div
-					className="absolute inset-0 top-[110%]"
+					className="absolute inset-0 top-[110%] z-30"
 					ref={mobileNavigationRef}
 				>
 					<div

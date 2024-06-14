@@ -49,7 +49,7 @@ const SettingsDropdown = () => {
 			</button>
 			{showDropdown && (
 				<div
-					className="absolute right-0 top-[125%] p-2 rounded-lg
+					className="absolute right-0 top-[125%] p-2 rounded-lg z-30
 					border border-neutral-400 bg-white dark:bg-neutral-800 dark:border-0
 					flex flex-col gap-2"
 					ref={dropdownRef}

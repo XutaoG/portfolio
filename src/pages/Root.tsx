@@ -11,13 +11,11 @@ const Root = () => {
 	return (
 		<div
 			className={`
-				${darkMode ? "dark" : ""} min-h-dvh flex flex-col gap-4 p-4 pb-0
+				${darkMode ? "dark" : ""} min-h-dvh flex flex-col gap-4 p-2 pb-0 sm:p-4 sm:pb-0
 				text-black dark:text-white 
 				transition-colors duration-300`}
 		>
-			<div className="-z-50">
-				<BackgroundCanvas />
-			</div>
+			<BackgroundCanvas />
 			<NavigationBar />
 			<div className="grow flex">
 				{/* Content container */}
@@ -29,11 +27,7 @@ const Root = () => {
 					<NextPageButtonContainer />
 				</div>
 				{/* Scroll bar container */}
-				<div className="w-8 flex justify-center items-start relative">
-					<div className="fixed top-[50%] -translate-y-[50%]">
-						<ScrollBar />
-					</div>
-				</div>
+				<ScrollBar />
 			</div>
 		</div>
 	);

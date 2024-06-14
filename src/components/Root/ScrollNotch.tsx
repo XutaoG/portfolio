@@ -42,7 +42,7 @@ const ScrollNotch = ({
 			>
 				<div className="w-2 h-2 bg-gradient-to-r from-blue-700 to-purple-700 border border-white" />
 			</button>
-			{labelState || selected ? (
+			{labelState ? (
 				<Label
 					className="absolute right-10 top-0"
 					text={text}
