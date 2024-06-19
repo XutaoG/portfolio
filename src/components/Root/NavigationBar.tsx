@@ -11,7 +11,7 @@ const NavigationBar = () => {
 	const location = useLocation();
 
 	const navBarBreakPoint = 900;
-	const breakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
+	const navBarBreakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
 
 	const [showMobileNavigation, setShowMobileNavigation] = useState(false);
 
@@ -43,7 +43,7 @@ const NavigationBar = () => {
 					textFont="poppins"
 					selected
 					disabled
-					mobile={!breakpointCheck}
+					mobile={!navBarBreakpointCheck}
 					onClick={() => {
 						navigate(nav.destination);
 					}}
@@ -55,7 +55,7 @@ const NavigationBar = () => {
 				key={index}
 				text={nav.name}
 				textFont="poppins"
-				mobile={!breakpointCheck}
+				mobile={!navBarBreakpointCheck}
 				onClick={() => {
 					navigate(nav.destination);
 				}}
@@ -70,7 +70,7 @@ const NavigationBar = () => {
 		>
 			<div className="flex gap-1">
 				{/* Display navigation open button inside navigation bar when viewport width is below breakpoint */}
-				{!breakpointCheck && (
+				{!navBarBreakpointCheck && (
 					<button
 						className="h-full aspect-square flex justify-center items-center 
 							bg-neutral-500 dark:bg-neutral-600 text-white text-2xl p-0.5 
@@ -90,12 +90,12 @@ const NavigationBar = () => {
 				</div>
 			</div>
 			{/* Display navigation buttons inside navigation bar when viewport width exceeds breakpoint */}
-			{breakpointCheck ? (
+			{navBarBreakpointCheck ? (
 				<div className="flex gap-2">{renderedNavigationButtons}</div>
 			) : null}
 			<SettingsDropdown />
 			{/* Display mobile navigation */}
-			{!breakpointCheck && showMobileNavigation && (
+			{!navBarBreakpointCheck && showMobileNavigation && (
 				<div
 					className="absolute inset-0 top-[110%] z-30"
 					ref={mobileNavigationRef}

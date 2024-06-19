@@ -1,23 +1,18 @@
-import { twMerge } from "tailwind-merge";
 import Button from "../Reusable/Button";
-import classNames from "classnames";
+import { useBreakpointWidthCheck } from "../../hooks";
 
-interface projectTileProps {
-	size: number;
-}
+// interface projectTileProps {
+// 	size: number;
+// }
 
-const ProjectTile = ({ size }: projectTileProps) => {
-	const height = twMerge(
-		classNames({
-			"aspect-[3/2] sm:aspect-square": size === 1,
-			"h-[600px]": size === 2,
-			"h-[700px]": size === 3,
-		})
-	);
+const ProjectTile = () => {
+	const subheadingBreakpoint = 425;
+	const subheadingBreakpointCheck =
+		useBreakpointWidthCheck(subheadingBreakpoint);
 
 	return (
 		<div
-			className={`${height} w-full flex flex-col cursor-pointer
+			className={`aspect-[3/2] sm:aspect-square w-full flex flex-col cursor-pointer
 			p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-800
 			hover:scale-[1.03] transition-transform duration-300`}
 		>
@@ -27,9 +22,11 @@ const ProjectTile = ({ size }: projectTileProps) => {
 			<div className="flex justify-between items-start">
 				<div>
 					<p className="ibm-plex-mono font-semibold">PORTFOLIO</p>
-					<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
-						FULL STACK APPLICATION
-					</p>
+					{subheadingBreakpointCheck && (
+						<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
+							FULL STACK APPLICATION
+						</p>
+					)}
 				</div>
 				<p className="anonymous-pro">2024</p>
 			</div>

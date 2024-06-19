@@ -21,18 +21,12 @@ const ProjectsPage = () => {
 				<ProjectModalView />
 			</Modal>
 			{/* Projects */}
-			{/* <div className="flex flex-col gap-2" onClick={handleOpenModal}> */}
-			<ProjectTile size={1} />
-			<ProjectTile size={1} />
-			{/* </div> */}
-			{/* <div className="flex flex-col gap-2"> */}
-			<ProjectTile size={1} />
-			<ProjectTile size={1} />
-			{/* </div> */}
-			{/* <div className="flex flex-col gap-2"> */}
-			<ProjectTile size={1} />
-			<ProjectTile size={1} />
-			{/* </div> */}
+			<ProjectTile />
+			<ProjectTile />
+			<ProjectTile />
+			<ProjectTile />
+			<ProjectTile />
+			<ProjectTile />
 		</div>
 	);
 };

@@ -2,8 +2,9 @@ import Button from "../Reusable/Button";
 
 const ProjectModalView = () => {
 	return (
-		<div className="flex flex-col gap-1 w-min">
-			<div className="w-[800px] h-[500px] flex border border-neutral-400"></div>
+		<div className="">
+			{/* Photos */}
+			<div className="h-96 flex border border-neutral-400"></div>
 			{/* Title */}
 			<div className="flex justify-between items-start">
 				<div>
