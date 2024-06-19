@@ -65,7 +65,7 @@ const NavigationBar = () => {
 
 	return (
 		<div
-			className="h-10 flex justify-between rounded-lg p-1 gap-2
+			className="h-10 md:h-12 flex justify-between rounded-lg p-1 gap-2
 			bg-white border border-neutral-400 dark:bg-neutral-800 dark:border-0 relative"
 		>
 			<div className="flex gap-1">
@@ -82,7 +82,7 @@ const NavigationBar = () => {
 					</button>
 				)}
 				<div
-					className="h-full flex items-center gap-2 pr-1 rounded-lg 
+					className="h-full flex items-center gap-2 p-0.5 pr-1 rounded-lg 
 					bg-neutral-300 dark:bg-neutral-900"
 				>
 					<LogoShuffler />

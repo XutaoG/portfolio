@@ -6,8 +6,11 @@ import {
 	toggleDarkMode,
 } from "../../store/slices/systemSlice";
 import { useRef, useState } from "react";
+import Cookies from "universal-cookie";
 
 const SettingsDropdown = () => {
+	const cookies = new Cookies(null, { path: "/" });
+
 	const canvasMode = useAppSelector((state) => state.system.canvasMode);
 	const darkMode = useAppSelector((state) => state.system.darkMode);
 
@@ -18,11 +21,13 @@ const SettingsDropdown = () => {
 	// ! Switch between light and dark mode
 	const onColorModeChange = () => {
 		dispatch(toggleDarkMode(!darkMode));
+		cookies.set("display-mode", { darkMode: !darkMode });
 	};
 
 	// ! Switch between canvas on and off
 	const onCanvasChange = () => {
 		dispatch(toggleCanvasMode(!canvasMode));
+		cookies.set("canvas", { on: !canvasMode });
 	};
 
 	// ! Detect click outside of dropdown component

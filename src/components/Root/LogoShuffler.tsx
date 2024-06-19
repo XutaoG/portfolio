@@ -3,10 +3,18 @@ import illeniumImg from "../../assets/logo-shuffle-images/illenium.jpg";
 import mortyImg from "../../assets/logo-shuffle-images/morty.jpg";
 import ramenImg from "../../assets/logo-shuffle-images/ramen.jpg";
 import catImg from "../../assets/logo-shuffle-images/cat.jpg";
+import meIllustratedImg from "../../assets/logo-shuffle-images/me-illustrated.jpg";
 import { useState } from "react";
 
 const LogoShuffler = () => {
-	const images = [diamondImg, illeniumImg, mortyImg, ramenImg, catImg];
+	const images = [
+		diamondImg,
+		illeniumImg,
+		mortyImg,
+		ramenImg,
+		catImg,
+		meIllustratedImg,
+	];
 	const [imageIndex, setImageIndex] = useState(0);
 
 	// * Shuffle logo images

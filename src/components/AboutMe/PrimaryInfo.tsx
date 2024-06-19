@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../Reusable/Button";
 
 const PrimaryInfo = () => {
+	const navigate = useNavigate();
+
 	return (
 		<div className="flex flex-col gap-2 sm:gap-6">
 			<p className="anonymous-pro text-2xl">Welcome to My Portfolio</p>
@@ -23,7 +26,13 @@ const PrimaryInfo = () => {
 					<div className="w-1.5 aspect-square bg-green-700 rounded-full"></div>
 					<p className="poppins text-green-700">Available for Work</p>
 				</div>
-				<Button text="Contact Me" textFont="poppins" fill large />
+				<Button
+					text="Contact Me"
+					textFont="poppins"
+					fill
+					large
+					onClick={() => navigate("/contact")}
+				/>
 			</div>
 		</div>
 	);
