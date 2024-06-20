@@ -28,7 +28,7 @@ const Button = ({
 			textFont,
 			{
 				"rounded-full": rounded,
-				"self-stretch grow basis-0": fill,
+				"self-stretch grow hover:scale-[1.05]": fill,
 				"px-3 py-1 text-lg hover:scale-[1.05]": large,
 				"w-32": fixedWidth,
 			}

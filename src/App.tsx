@@ -10,7 +10,6 @@ import {
 	createRoutesFromElements,
 } from "react-router-dom";
 import Root from "./pages/Root";
-import { Fragment } from "react/jsx-runtime";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -25,12 +24,7 @@ const router = createBrowserRouter(
 );
 
 function App() {
-	return (
-		<Fragment>
-			<RouterProvider router={router} />
-			{/* <div id="modal-container"></div> */}
-		</Fragment>
-	);
+	return <RouterProvider router={router} />;
 }
 
 export default App;
