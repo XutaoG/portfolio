@@ -1,12 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { useOutlet } from "react-router-dom";
 import NavigationBar from "../components/Root/NavigationBar";
 import { useAppSelector } from "../hooks";
 import ScrollBar from "../components/Root/ScrollBar";
 import BackgroundCanvas from "../components/Root/BackgroundCanvas";
 import NextPageButtonContainer from "../components/Reusable/NextPageButtonContainer";
+import { useRef } from "react";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 
 const Root = () => {
 	const darkMode = useAppSelector((state) => state.system.darkMode);
+
+	const currentOutlet = useOutlet();
+	const nodeRef = useRef(null);
 
 	return (
 		<div
@@ -20,9 +25,23 @@ const Root = () => {
 			<div className="grow flex">
 				{/* Content container */}
 				<div className="grow flex flex-col">
-					<div className="grow container mx-auto flex justify-center">
-						<Outlet />
-					</div>
+					<SwitchTransition>
+						<CSSTransition
+							key={location.pathname}
+							nodeRef={nodeRef}
+							timeout={300}
+							classNames="page"
+							unmountOnExit
+						>
+							<div
+								className="grow container mx-auto flex justify-center"
+								ref={nodeRef}
+							>
+								{/* <Outlet /> */}
+								{currentOutlet}
+							</div>
+						</CSSTransition>
+					</SwitchTransition>
 					{/* Down arrow container */}
 					<NextPageButtonContainer />
 				</div>
