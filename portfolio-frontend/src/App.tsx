@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Root from "./pages/Root";
 import "./index.css";
+import React from "react";
 
 // const duration = 300;
 
