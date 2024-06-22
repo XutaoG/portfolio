@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
 import Cookies from "universal-cookie";
 
 const SettingsDropdown = () => {
-	const cookies = new Cookies(null, { path: "/" });
+	const cookies = new Cookies(null, { path: "/", maxAge: 60 * 60 * 24 * 30 });
 
 	const canvasMode = useAppSelector((state) => state.system.canvasMode);
 	const darkMode = useAppSelector((state) => state.system.darkMode);

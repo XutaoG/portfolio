@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Button from "../Reusable/Button";
 import Input from "../Reusable/Input";
 import TextArea from "../Reusable/TextArea";
@@ -20,10 +20,15 @@ const ContactMeForm = () => {
 		setMessage(event.target.value);
 	};
 
+	const onMessageSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+	};
+
 	return (
 		<form
 			className="p-3 border-neutral-400 bg-neutral-200 dark:bg-neutral-600 dark:border-0
 			flex flex-col gap-4"
+			onSubmit={onMessageSubmit}
 		>
 			<Input title="Full name" placeholder="Xutao Gao" />
 			<Input title="E-mail" placeholder="example@email.com" />
