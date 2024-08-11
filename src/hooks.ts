@@ -8,15 +8,21 @@ const useAppDispatch = () => useDispatch<AppDispatch>();
 export { useAppDispatch, useAppSelector };
 
 const useBreakpointWidthCheck = (breakpoint: number) => {
-	const [width, setWidth] = useState(window.innerWidth);
+	const [reached, setReached] = useState(false);
 
 	useEffect(() => {
-		const handleWindowResize = () => setWidth(window.innerWidth);
+		const handleWindowResize = () => {
+			if (window.innerWidth >= breakpoint && !reached) {
+				setReached(true);
+			} else if (window.innerWidth < breakpoint && reached) {
+				setReached(false);
+			}
+		};
 		window.addEventListener("resize", handleWindowResize);
 		return () => window.removeEventListener("resize", handleWindowResize);
-	}, []);
+	}, [breakpoint, reached]);
 
-	return width >= breakpoint;
+	return reached;
 };
 
 const useOutsideClick = (
