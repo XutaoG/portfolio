@@ -24,7 +24,7 @@ const Modal = ({ show, children, onClose }: modalProps) => {
 
 	return createPortal(
 		<div
-			className={`fixed inset-0 ${display} flex justify-center p-4 overflow-auto`}
+			className={`fixed inset-0 ${display} flex justify-center p-4 overflow-auto z-50`}
 		>
 			{/* Background */}
 			<div
@@ -32,7 +32,10 @@ const Modal = ({ show, children, onClose }: modalProps) => {
 				onClick={onClose}
 			></div>
 			{/* Content */}
-			<div className="w-full max-w-[768px] my-auto bg-white flex flex-col p-4 pb-8 gap-4 rounded-md z-50">
+			<div
+				className="w-full max-w-[768px] my-auto bg-white dark:bg-neutral-700 
+				flex flex-col p-4 pb-8 gap-4 rounded-md text-black dark:text-white z-50"
+			>
 				{/* Close modal button */}
 				<button
 					className="flex gap-1 items-center self-start"
@@ -46,7 +49,7 @@ const Modal = ({ show, children, onClose }: modalProps) => {
 				{children}
 			</div>
 		</div>,
-		document.body
+		document.getElementById("root")!
 	);
 };
 

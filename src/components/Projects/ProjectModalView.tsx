@@ -1,41 +1,60 @@
+import { project } from "../../modals/project";
 import Button from "../Reusable/Button";
 
-const ProjectModalView = () => {
+interface projectModalViewProps {
+	project: project;
+}
+
+const ProjectModalView = ({ project }: projectModalViewProps) => {
 	return (
-		<div className="">
+		<div className="flex flex-col gap-4 bg-white dark:bg-neutral-700">
 			{/* Photos */}
-			<div className="h-96 flex border border-neutral-400"></div>
-			{/* Title */}
-			<div className="flex justify-between items-start">
-				<div>
-					<p className="ibm-plex-mono font-semibold text-lg">
-						PORTFOLIO
+			<div className="h-96 flex border border-neutral-400 rounded-md p-2">
+				<div className="self-start gap-4">
+					{/* Title */}
+					<p className="poppins font-semibold text-xl tracking-wider">
+						{project.title}
 					</p>
-					<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
-						FULL STACK APPLICATION
+					{/* Role */}
+					<p className="ibm-plex-mono font-medium text-sm">
+						Role: {project.role}
 					</p>
 				</div>
-				<p className="anonymous-pro">2024</p>
 			</div>
-			{/* Action */}
-			<div className="flex justify-end gap-3">
-				<Button text="/code" textFont="ibm-plex-mono" />
+			<div className="flex justify-between items-end bg-neutral-800 rounded-md p-2">
+				<div className="flex flex-col gap-1">
+					{/* Year */}
+					<p className="anonymous-pro">
+						{`${project.startDate.getMonth()}/${project.startDate.getFullYear()} -
+						${project.endDate.getMonth()}/${project.endDate.getFullYear()}`}
+					</p>
+					{/* Project Type */}
+					<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
+						{project.projectType.toUpperCase()}
+					</p>
+				</div>
+				{/* Action */}
+				<Button
+					text="/github"
+					textFont="ibm-plex-mono"
+					onClick={() => {
+						window.open(project.link, "_blank");
+					}}
+				/>
 			</div>
 			{/* Description */}
-			<div>
-				<p className="ibm-plex-mono font-bold">Description</p>
-				<p className="crimson-text">
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-					Sunt, repellendus distinctio. Eius nostrum tempora nulla
-					excepturi fugiat amet nihil inventore magni dolor recusandae
-					fuga totam tenetur quidem error deserunt enim, impedit
-					dolores.
+			<div className="flex flex-col gap-1">
+				<p className="poppins font-semibold tracking-wider">
+					DESCRIPTION
 				</p>
+				<p className="crimson-text pl-4">{project.description}</p>
 			</div>
 			{/* Technologies */}
-			<div>
-				<p className="ibm-plex-mono font-bold">Technologies Used</p>
-				<ul className="list-disc pl-6 crimson-text">
+			<div className="flex flex-col gap-1">
+				<p className="poppins font-semibold tracking-wider">
+					TECHNOLOGIES
+				</p>
+				<ul className="list-disc pl-4 list-outside crimson-text">
 					<li>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						Magnam, soluta.

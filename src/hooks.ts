@@ -18,6 +18,7 @@ const useBreakpointWidthCheck = (breakpoint: number) => {
 				setReached(false);
 			}
 		};
+		handleWindowResize();
 		window.addEventListener("resize", handleWindowResize);
 		return () => window.removeEventListener("resize", handleWindowResize);
 	}, [breakpoint, reached]);
