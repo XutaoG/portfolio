@@ -14,7 +14,7 @@ export const projects: project[] = [
 		title: "DevFusion",
 		description: "Online project collaboration platform.",
 		projectType: "Fullstack Project",
-		startDate: new Date(2024, 7),
+		startDate: new Date(2024, 8),
 		endDate: new Date(2024, 8),
 		role: "Frontend Developer",
 		link: "https://github.com/Gersh01/Dev-Fusion",
