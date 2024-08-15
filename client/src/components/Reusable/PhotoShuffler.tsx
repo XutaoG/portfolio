@@ -4,28 +4,41 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 // import pic3 from "../../assets/photo-images/pic3.jpg";
 // import pic4 from "../../assets/photo-images/pic4.jpg";
 // import pic5 from "../../assets/photo-images/pic5.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const PhotoShuffler = () => {
+interface PhotoShufferProps {
+	photos: string[];
+}
+
+const PhotoShuffler = ({ photos }: PhotoShufferProps) => {
 	const [photoIndex, setPhotoIndex] = useState(0);
 
-	const photos: string[] = [];
+	useEffect(() => {
+		setPhotoIndex(0);
+	}, [photos]);
 
 	// * Navigate photos
 	const prevPhoto = () => {
-		setPhotoIndex((val) => (val - 1) % photos.length);
+		setPhotoIndex((val) => {
+			if (val === 0) {
+				return photos.length - 1;
+			}
+			return val - 1;
+		});
 	};
 	const nextPhoto = () => {
 		setPhotoIndex((val) => (val + 1) % photos.length);
 	};
 
 	return (
-		<div className="size-full bg-white border border-neutral-400 rounded-lg relative">
-			{/* <img
-				className="rounded-lg h-full w-full absolute inset-0 object-cover"
-				src={photos[photoIndex]}
-				alt="My photos"
-			/> */}
+		<div className="size-full relative">
+			{photos.length === 0 || (
+				<img
+					className="h-full w-full absolute inset-0 object-cover"
+					src={photos[photoIndex]}
+					alt="My photos"
+				/>
+			)}
 			{/* Change photo buttons */}
 			<div className="absolute inset-0 flex justify-between items-center px-1.5">
 				<button

@@ -54,6 +54,14 @@ body::-webkit-scrollbar {
 	font-family: "LXGW WenKai TC", cursive;
 }
 
+.roboto {
+	font-family: "Roboto", sans-serif;
+}
+
+.inter {
+	font-family: "Inter", sans-serif;
+}
+
 /* Page Transition */
 .page-enter {
 	/* opacity: 0; */

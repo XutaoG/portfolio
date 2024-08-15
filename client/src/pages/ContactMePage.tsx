@@ -8,7 +8,7 @@ const ContactMePage = () => {
 			{/* Photos */}
 
 			<div className="hidden lg:block w-96 aspect-[2/3]">
-				<PhotoShuffler />
+				<PhotoShuffler photos={[]} />
 			</div>
 
 			{/* Info */}

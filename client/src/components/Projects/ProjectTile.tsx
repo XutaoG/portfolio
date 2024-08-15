@@ -1,9 +1,9 @@
 import { useBreakpointWidthCheck } from "../../hooks";
-import { project } from "../../modals/project";
+import { Project } from "../../models/project";
 
 interface projectTileProps {
-	project: project;
-	handleOpenModal: (projectToOpen: project) => void;
+	project: Project;
+	handleOpenModal: (projectToOpen: string) => void;
 }
 
 const ProjectTile = ({ project, handleOpenModal }: projectTileProps) => {
@@ -13,46 +13,33 @@ const ProjectTile = ({ project, handleOpenModal }: projectTileProps) => {
 
 	return (
 		<div
-			className={`aspect-[3/2] sm:aspect-square w-full flex flex-col cursor-pointer
+			className={`w-full flex flex-col gap-1 cursor-pointer
 			p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-800
 			hover:scale-[1.03] transition-transform duration-300`}
 			onClick={() => {
-				handleOpenModal(project);
+				handleOpenModal(project._id);
 			}}
 		>
 			{/* Demo */}
-			<div className="grow border border-neutral-400 bg-white rounded-md"></div>
+			<div className="aspect-video grow rounded-md overflow-hidden border border-neutral-400">
+				<img src={project.images[0]} />
+			</div>
 			{/* Description */}
-			<div className="flex justify-between items-start">
-				<div>
-					<p className="ibm-plex-mono font-semibold">
+			<div className="flex flex-col">
+				<div className="flex justify-between items-start">
+					<p className="poppins font-semibold text-lg">
 						{project.title}
 					</p>
-					{subheadingBreakpointCheck && (
-						<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
-							{project.projectType}
-						</p>
-					)}
+					<p className="poppins font-semibold text-lg">
+						{new Date(project.endDate).getFullYear()}
+					</p>
 				</div>
-				<p className="anonymous-pro">{project.endDate.getFullYear()}</p>
+				{subheadingBreakpointCheck && (
+					<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
+						{project.projectType.toUpperCase()}
+					</p>
+				)}
 			</div>
-			{/* Action */}
-			{/* <div className="flex justify-end gap-3">
-				<Button
-					text="/view"
-					textFont="ibm-plex-mono"
-					onClick={() => {
-						handleOpenModal(project);
-					}}
-				/>
-				<Button
-					text="/code"
-					textFont="ibm-plex-mono"
-					onClick={() => {
-						window.open(project.link, "_blank");
-					}}
-				/>
-			</div> */}
 		</div>
 	);
 };

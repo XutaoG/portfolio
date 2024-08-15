@@ -1,5 +1,27 @@
 import { Schema, model } from "mongoose";
 
+const technologySchema = Schema({
+	technology: {
+		type: Schema.Types.String,
+		required: true,
+	},
+	description: {
+		type: Schema.Types.String,
+		required: true,
+	},
+});
+
+const featureSchema = Schema({
+	feature: {
+		type: Schema.Types.String,
+		required: true,
+	},
+	description: {
+		type: Schema.Types.String,
+		required: true,
+	},
+});
+
 const projectSchema = Schema({
 	title: {
 		type: Schema.Types.String,
@@ -21,8 +43,24 @@ const projectSchema = Schema({
 		required: true,
 	},
 	technologies: {
-		type: [Schema.Types.String],
+		type: [technologySchema],
 		required: true,
+		validate: [
+			(val) => {
+				return val.length >= 1;
+			},
+			"technologies cannot be empty",
+		],
+	},
+	features: {
+		type: [featureSchema],
+		required: true,
+		validate: [
+			(val) => {
+				return val.length >= 1;
+			},
+			"features cannot be empty",
+		],
 	},
 	startDate: {
 		type: Schema.Types.Date,
@@ -35,6 +73,12 @@ const projectSchema = Schema({
 	images: {
 		type: [Schema.Types.String],
 		required: true,
+		validate: [
+			(val) => {
+				return val.length >= 1;
+			},
+			"images cannot be empty",
+		],
 	},
 });
 

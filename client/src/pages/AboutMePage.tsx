@@ -8,7 +8,7 @@ const AboutMePage = () => {
 			<div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 sm:gap-6">
 				{/* Picture */}
 				<div className="w-full aspect-square sm:h-full sm:aspect-auto">
-					<PhotoShuffler />
+					<PhotoShuffler photos={[]} />
 				</div>
 				{/* Introduction */}
 				<PrimaryInfo />
