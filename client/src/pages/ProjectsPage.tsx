@@ -6,8 +6,11 @@ import { Project } from "../models/project";
 
 import axios from "axios";
 import LoadingIndicator from "../components/Reusable/LoadingIndicator";
+import { useChangePageByScroll } from "../hooks";
 
 const ProjectsPage = () => {
+	useChangePageByScroll("/", "/resume");
+
 	const [showModal, setShowModal] = useState(false);
 	const [openedProjectId, setOpenedProjectId] = useState<string | null>(null);
 

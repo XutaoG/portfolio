@@ -42,6 +42,10 @@ body::-webkit-scrollbar {
 	font-family: "Crimson Text", serif;
 }
 
+.crimson-pro {
+	font-family: "Crimson Pro", serif;
+}
+
 .playfair-display {
 	font-family: "Playfair Display", serif;
 }
@@ -60,6 +64,18 @@ body::-webkit-scrollbar {
 
 .inter {
 	font-family: "Inter", sans-serif;
+}
+
+.anton-sc-regular {
+	font-family: "Anton SC", sans-serif;
+}
+
+.moderustic {
+	font-family: "Moderustic", sans-serif;
+}
+
+.architects-daughter-regular {
+	font-family: "Architects Daughter", cursive;
 }
 
 /* Page Transition */

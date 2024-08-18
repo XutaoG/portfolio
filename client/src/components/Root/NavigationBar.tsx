@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import LogoShuffler from "./LogoShuffler";
 import NavigationButton from "./NavigationButton";
-import SettingsDropdown from "./SettingsDropdown";
 import { MdViewHeadline } from "react-icons/md";
 import { useBreakpointWidthCheck, useOutsideClick } from "../../hooks";
 import { useRef, useState } from "react";
@@ -65,8 +64,8 @@ const NavigationBar = () => {
 
 	return (
 		<div
-			className="h-10 md:h-12 flex justify-between rounded-lg p-1 gap-2
-			bg-white border border-neutral-400 dark:bg-neutral-800 dark:border-0 relative z-30"
+			className="h-12 md:h-14 flex justify-between p-2 gap-2
+			relative z-30"
 		>
 			<div className="flex gap-1">
 				{/* Display navigation open button inside navigation bar when viewport width is below breakpoint */}
@@ -81,19 +80,18 @@ const NavigationBar = () => {
 						<MdViewHeadline />
 					</button>
 				)}
-				<div
-					className="h-full flex items-center gap-2 p-0.5 pr-1 rounded-lg 
-					bg-neutral-300 dark:bg-neutral-900"
-				>
+				<div className="h-full flex items-center gap-2 p-1 pr-2 border-2 border-white">
 					<LogoShuffler />
-					<p className="poppins font-medium text-nowrap">XUTAO GAO</p>
+					<p className="poppins font-medium text-nowrap text-lg">
+						XUTAO GAO
+					</p>
 				</div>
 			</div>
 			{/* Display navigation buttons inside navigation bar when viewport width exceeds breakpoint */}
 			{navBarBreakpointCheck ? (
 				<div className="flex gap-2">{renderedNavigationButtons}</div>
 			) : null}
-			<SettingsDropdown />
+			{/* <SettingsDropdown /> */}
 			{/* Display mobile navigation */}
 			{!navBarBreakpointCheck && showMobileNavigation && (
 				<div

@@ -1,32 +1,27 @@
 import { useOutlet } from "react-router-dom";
 import NavigationBar from "../components/Root/NavigationBar";
-import { useAppSelector } from "../hooks";
 import ScrollBar from "../components/Root/ScrollBar";
 import BackgroundCanvas from "../components/Root/BackgroundCanvas";
 import NextPageButtonContainer from "../components/Reusable/NextPageButtonContainer";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
+import BackgroundColumns from "../components/Root/BackgroundColumns";
 
 const Root = () => {
-	const darkMode = useAppSelector((state) => state.system.darkMode);
-
 	const currentOutlet = useOutlet();
 	const nodeRef = useRef(null);
-
-	useEffect(() => {
-		document.getElementById("root")!.className = darkMode ? "dark" : "";
-	}, [darkMode]);
 
 	return (
 		<div
 			className={`
-				min-h-dvh flex flex-col gap-4 p-2 pb-0 sm:p-4 sm:pb-0
-				text-black dark:text-white 
-				transition-colors duration-300`}
+				min-h-dvh flex flex-col gap-4 
+				text-white bg-neutral-950
+				transition-colors duration-300 relative`}
 		>
+			<BackgroundColumns />
 			<BackgroundCanvas />
 			<NavigationBar />
-			<div className="grow flex">
+			<div className="grow flex z-20">
 				{/* Content container */}
 				<div className="grow flex flex-col gap-4">
 					<SwitchTransition>

@@ -33,8 +33,8 @@ const Modal = ({ show, children, onClose }: modalProps) => {
 			></div>
 			{/* Content */}
 			<div
-				className="w-full max-w-[768px] my-auto bg-white dark:bg-neutral-700 
-				flex flex-col p-4 pb-8 gap-4 rounded-md text-black dark:text-white z-50"
+				className="w-full max-w-[1024px] my-auto bg-white dark:bg-neutral-700 
+				flex flex-col p-4 pb-8 gap-4 rounded-sm text-black dark:text-white z-50"
 			>
 				{/* Close modal button */}
 				<button

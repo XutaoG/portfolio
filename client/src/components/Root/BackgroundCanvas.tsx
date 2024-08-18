@@ -304,7 +304,7 @@ const BackgroundCanvas = () => {
 	});
 
 	return (
-		<div className="-z-50 fixed top-0 left-0 h-full w-full bg-white dark:bg-neutral-700">
+		<div className="z-10 fixed top-0 left-0 h-full w-full">
 			{canvasMode ? (
 				<canvas
 					className="bg-transparent h-full w-full"

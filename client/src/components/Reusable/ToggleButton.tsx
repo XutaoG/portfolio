@@ -13,21 +13,21 @@ const ToggleButton = ({
 }: toggleButtonProps) => {
 	return (
 		<div className="flex gap-2.5 items-center">
-			<p className="poppins font-medium">{offText}</p>
+			<p className="inter tracking-wider">{offText}</p>
 			<button
-				className="w-10 bg-gradient-to-r from-blue-700 to-purple-700
+				className="w-10 bg-white
 				flex justify-start items-center rounded-full p-1
-				hover:scale-[1.2] transition-transform duration-300"
+				hover:scale-[1.2] transition-transform duration-300 transform-gpu"
 				onClick={onToggleClick}
 			>
 				<div
-					className={`w-4 aspect-square bg-white rounded-full ${
+					className={`w-4 aspect-square bg-neutral-400 rounded-full ${
 						mode ? "translate-x-4" : ""
 					}
-					transition-transform duration-500`}
+					transition-transform duration-500 transform-gpu`}
 				></div>
 			</button>
-			<p className="poppins font-medium">{onText}</p>
+			<p className="inter tracking-wider">{onText}</p>
 		</div>
 	);
 };

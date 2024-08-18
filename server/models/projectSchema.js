@@ -62,6 +62,9 @@ const projectSchema = Schema({
 			"features cannot be empty",
 		],
 	},
+	responsibility: {
+		type: Schema.Types.String,
+	},
 	startDate: {
 		type: Schema.Types.Date,
 		required: true,

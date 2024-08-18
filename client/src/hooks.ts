@@ -1,6 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -62,4 +63,42 @@ const useOutsideClick = (
 	});
 };
 
-export { useBreakpointWidthCheck, useOutsideClick };
+const useChangePageByScroll = (
+	prevRoute: string | null,
+	nextRoute: string | null
+) => {
+	const navigate = useNavigate();
+	const disableTime = 2000;
+	const disabled = useRef(false);
+
+	useEffect(() => {
+		const handleScroll = (event: WheelEvent) => {
+			if (disabled.current) {
+				return;
+			}
+			if (event.deltaY !== 0) {
+				if (event.deltaY < 0) {
+					if (prevRoute !== null) {
+						navigate(prevRoute);
+					}
+				} else if (event.deltaY > 0) {
+					if (nextRoute !== null) {
+						navigate(nextRoute);
+					}
+				}
+
+				disabled.current = true;
+				setTimeout(() => {
+					disabled.current = false;
+				}, disableTime);
+			}
+		};
+		window.addEventListener("wheel", handleScroll);
+
+		return () => {
+			window.removeEventListener("wheel", handleScroll);
+		};
+	}, [navigate, nextRoute, prevRoute]);
+};
+
+export { useBreakpointWidthCheck, useOutsideClick, useChangePageByScroll };

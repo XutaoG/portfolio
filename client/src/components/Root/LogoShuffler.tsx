@@ -25,7 +25,7 @@ const LogoShuffler = () => {
 	return (
 		<button className="h-full cursor-pointer" onClick={changeImage}>
 			<img
-				className="h-full rounded-md object-contain"
+				className="h-full object-contain"
 				src={images[imageIndex]}
 				alt="logo shuffle images"
 			/>

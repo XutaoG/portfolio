@@ -61,11 +61,14 @@ const ProjectModalView = ({ projectId }: projectModalViewProps) => {
 	) : (
 		<div className="flex flex-col gap-8 bg-white dark:bg-neutral-700">
 			{/* Photos */}
-			<div className="flex flex-col border border-neutral-400 rounded-md overflow-hidden relative">
+			<div className="flex flex-col rounded-md overflow-hidden relative">
 				<div className="aspect-video">
 					<PhotoShuffler photos={project.images} />
 				</div>
-				<div className="flex flex-col gap-1 p-2 absolute left-0 right-0 bg-black/80 rounded-br-lg text-white">
+				<div
+					className="flex flex-col gap-1 p-2 absolute left-0 right-0 
+					bg-black/80 hover:bg-black/20 text-white hover:text-white/20"
+				>
 					{/* Title */}
 					<p className="poppins font-semibold text-xl tracking-wider">
 						{project.title}
@@ -74,50 +77,53 @@ const ProjectModalView = ({ projectId }: projectModalViewProps) => {
 					<p className="poppins text-sm">Role: {project.role}</p>
 				</div>
 			</div>
-			<div className="flex justify-between items-end bg-neutral-200 dark:bg-neutral-800 rounded-md p-2">
-				<div className="flex flex-col gap-1">
-					{/* Year */}
-					<p className="poppins font-semibold">
-						{`${new Date(project.startDate).getMonth()}/${new Date(
-							project.startDate
-						).getFullYear()} -
-					${new Date(project.endDate).getMonth()}/${new Date(
-							project.endDate
-						).getFullYear()}`}
-					</p>
-					{/* Project Type */}
-					<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
-						{project.projectType.toUpperCase()}
-					</p>
-				</div>
-				{/* Action */}
-				<Button
-					text="/github"
-					textFont="ibm-plex-mono"
-					onClick={() => {
-						window.open(project.link, "_blank");
-					}}
-				/>
-			</div>
+			{/* Action */}
+			<Button
+				text="/github"
+				textFont="ibm-plex-mono"
+				fill
+				disableHover
+				onClick={() => {
+					window.open(project.link, "_blank");
+				}}
+			/>
 			{/* Description */}
-			<div className="flex flex-col gap-1">
-				<div className="flex gap-4 items-center">
-					<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
-					<p className="inter font-semibold tracking-wider text-lg">
-						DESCRIPTION
-					</p>
-					<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
-				</div>
-				<p className="inter p-2 leading-6 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded-md">
-					{project.description}
+			<div className="flex flex-col gap-2 bg-neutral-300 dark:bg-neutral-800 rounded-md p-2">
+				<p className="inter font-semibold text-center italic">
+					Description
+				</p>
+				<p className="inter leading-6">{project.description}</p>
+				{/* Year */}
+				<p className="self-end poppins text-sm text-nowrap text-neutral-400">
+					{`${new Date(project.startDate).getMonth() + 2}/${new Date(
+						project.startDate
+					).getFullYear()} -
+						${new Date(project.endDate).getMonth() + 2}/${new Date(
+						project.endDate
+					).getFullYear()}`}
 				</p>
 			</div>
+			{/* Responsibility */}
+			{project.responsibility == null || (
+				<div className="flex flex-col gap-1">
+					<div className="flex gap-4 items-center px-2">
+						<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
+						<p className="inter font-semibold tracking-wider italic">
+							My Responsibility
+						</p>
+						<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
+					</div>
+					<p className="inter p-2 leading-6 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded-md">
+						{project.responsibility}
+					</p>
+				</div>
+			)}
 			{/* Technologies */}
 			<div className="flex flex-col gap-1">
-				<div className="flex gap-4 items-center">
+				<div className="flex gap-4 items-center px-2">
 					<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
-					<p className="inter font-semibold tracking-wider text-lg">
-						TECHNOLOGIES
+					<p className="inter font-semibold tracking-wider italic">
+						Technologies
 					</p>
 					<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
 				</div>
@@ -127,10 +133,10 @@ const ProjectModalView = ({ projectId }: projectModalViewProps) => {
 			</div>
 			{/* Features */}
 			<div className="flex flex-col gap-1">
-				<div className="flex gap-4 items-center">
+				<div className="flex gap-4 items-center px-2">
 					<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
-					<p className="inter font-semibold tracking-wider text-lg">
-						FEATURES
+					<p className="inter font-semibold tracking-wider italic">
+						Features
 					</p>
 					<div className="h-[1px] bg-neutral-400 dark:bg-neutral-400 grow" />
 				</div>

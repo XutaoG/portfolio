@@ -58,6 +58,15 @@ const PhotoShuffler = ({ photos }: PhotoShufferProps) => {
 					<MdKeyboardArrowRight className="text-2xl" />
 				</button>
 			</div>
+			{/* Show photo index */}
+			<div
+				className="absolute bottom-2 right-2 px-2
+				bg-neutral-300 dark:bg-neutral-500 rounded-md"
+			>
+				<p className="inter font-semibold">{`${photoIndex + 1}/${
+					photos.length
+				}`}</p>
+			</div>
 		</div>
 	);
 };
