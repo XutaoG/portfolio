@@ -9,7 +9,7 @@ const NavigationBar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const navBarBreakPoint = 700;
+	const navBarBreakPoint = 768;
 	const navBarBreakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
 
 	const [showMobileNavigation, setShowMobileNavigation] = useState(false);
@@ -63,17 +63,13 @@ const NavigationBar = () => {
 	});
 
 	return (
-		<div
-			className="h-12 md:h-14 flex justify-between p-2 gap-2
-			relative z-30"
-		>
+		<div className="h-10 md:h-12 flex justify-between gap-2 relative z-30 m-2">
 			<div className="flex gap-1">
 				{/* Display navigation open button inside navigation bar when viewport width is below breakpoint */}
 				{!navBarBreakpointCheck && (
 					<button
-						className="h-full aspect-square flex justify-center items-center 
-							bg-neutral-500 dark:bg-neutral-600 text-white text-2xl p-0.5 
-							rounded-md hover:scale-[1.1] transition-transform duration-300"
+						className="h-full aspect-square flex justify-center items-center border-2 border-white
+							text-2xl hover:scale-[1.1] transition-transform duration-300"
 						ref={mobileNavigationToggleRef}
 						onClick={toggleShowMobileNavigation}
 					>
@@ -92,14 +88,16 @@ const NavigationBar = () => {
 				<div className="flex gap-2">{renderedNavigationButtons}</div>
 			) : null}
 			{/* Display mobile navigation */}
-			{!navBarBreakpointCheck && showMobileNavigation && (
+			{!navBarBreakpointCheck && (
 				<div
 					className="absolute inset-0 top-[110%] z-30"
 					ref={mobileNavigationRef}
 				>
 					<div
-						className="p-1 rounded-lg flex flex-col gap-1
-						bg-white border border-neutral-400 dark:bg-neutral-800 dark:border-0"
+						className={`p-2 flex flex-col gap-2 border-2 border-white bg-neutral-950 scale-y-0 origin-top
+							${
+								showMobileNavigation && "scale-y-100"
+							} transition-transform duration-500 transform-gpu`}
 					>
 						{renderedNavigationButtons}
 					</div>

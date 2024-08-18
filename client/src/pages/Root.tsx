@@ -14,7 +14,7 @@ const Root = () => {
 	return (
 		<div
 			className={`
-				min-h-dvh flex flex-col gap-4 
+				min-h-dvh flex flex-col gap-4
 				text-white bg-neutral-950
 				transition-colors duration-300 relative`}
 		>

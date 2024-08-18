@@ -9,7 +9,7 @@ import EnjoyPanel from "./EnjoyPanel";
 
 const SecondaryInfo = () => {
 	return (
-		<div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 auto-rows-fr gap-2 border p-1 md:p-2">
+		<div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 auto-rows-fr gap-2 border p-1 sm:p-2">
 			<div className="col-span-3 md:col-span-3 lg:col-span-4 h-24 md:h-32 lg:h-36">
 				<LocationPanel />
 			</div>
