@@ -1,8 +1,8 @@
 const BackgroundColumns = () => {
 	const column = (
 		<div className="flex gap-4">
-			<div className="h-full w-[1px] bg-gradient-to-b from-transparent to-white/15 from-40%" />
-			<div className="h-full w-[1px] bg-gradient-to-b from-transparent to-white/15 from-40%" />
+			<div className="h-full w-[1px] bg-gradient-to-b from-transparent to-white/15 from-20%" />
+			<div className="h-full w-[1px] bg-gradient-to-b from-transparent to-white/15 from-20%" />
 		</div>
 	);
 

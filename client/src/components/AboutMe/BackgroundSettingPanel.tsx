@@ -14,10 +14,12 @@ const BackgroundSettingPanel = () => {
 	};
 	return (
 		<div
-			className="h-full flex flex-col items-center justify-center px-24 
-					gap-2 bg-blue-500 rounded-md inter text-black"
+			className="size-full flex flex-col items-center justify-center 
+			gap-2 bg-blue-500 rounded-md inter text-black"
 		>
-			<p className="font-light tracking-widest">Background</p>
+			<p className="font-light tracking-widest text-sm md:text-base">
+				Background
+			</p>
 			<ToggleButton
 				offText="Off"
 				onText="On"

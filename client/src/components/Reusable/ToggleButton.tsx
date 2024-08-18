@@ -21,7 +21,7 @@ const ToggleButton = ({
 				onClick={onToggleClick}
 			>
 				<div
-					className={`w-4 aspect-square bg-neutral-400 rounded-full ${
+					className={`w-4 aspect-square bg-gray-800 rounded-full ${
 						mode ? "translate-x-4" : ""
 					}
 					transition-transform duration-500 transform-gpu`}

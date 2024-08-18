@@ -13,27 +13,27 @@ const GitHubPanel = () => {
 	};
 	return (
 		<div
-			className="h-full px-16 flex flex-col items-center justify-center 
-	gap-1 bg-white rounded-md inter text-black relative hover:cursor-pointer"
+			className="h-full flex flex-col items-center justify-center 
+			gap-1 bg-gray-800 rounded-md inter text-white relative hover:cursor-pointer"
 			onMouseEnter={onGitHubHoverEnter}
 			onMouseLeave={onGitHubHoverLeave}
 		>
 			<p
 				className={`font-light tracking-widest ${
-					showGitHubLogo && "-translate-y-5"
+					showGitHubLogo && "-translate-y-4 md:-translate-y-5"
 				} transition-transform transform-gpu`}
 			>
 				GitHub
 			</p>
 			<p
-				className={`text-2xl tracking-wider font-light underline underline-offset-4 ${
-					showGitHubLogo && "translate-y-5"
+				className={`text-xl md:text-2xl tracking-wider font-light underline underline-offset-4 ${
+					showGitHubLogo && "translate-y-4 md:translate-y-5"
 				} transition-transform transform-gpu`}
 			>
 				Visit
 			</p>
 			<FaGithub
-				className={`absolute text-4xl opacity-0 ${
+				className={`absolute text-3xl md:text-4xl opacity-0 ${
 					showGitHubLogo && "opacity-100"
 				} transition-opacity`}
 			/>

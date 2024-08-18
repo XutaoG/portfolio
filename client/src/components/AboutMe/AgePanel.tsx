@@ -19,13 +19,15 @@ const AgePanel = () => {
 	};
 	return (
 		<div
-			className="h-full aspect-square flex flex-col items-center justify-center 
-	gap-1 bg-white rounded-md inter text-black"
+			className="size-full flex flex-col items-center justify-center 
+			gap-1 bg-gray-800 rounded-md inter text-white"
 			onMouseEnter={displayAgeInDays}
 			onMouseLeave={displayAgeInYears}
 		>
 			<p className="font-light tracking-widest">Age</p>
-			<p className="text-2xl tracking-wider font-light">{ageText}</p>
+			<p className="text-xl md:text-2xl tracking-wider font-ligh text-center">
+				{ageText}
+			</p>
 		</div>
 	);
 };

@@ -9,7 +9,7 @@ const NavigationBar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const navBarBreakPoint = 900;
+	const navBarBreakPoint = 700;
 	const navBarBreakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
 
 	const [showMobileNavigation, setShowMobileNavigation] = useState(false);
@@ -82,7 +82,7 @@ const NavigationBar = () => {
 				)}
 				<div className="h-full flex items-center gap-2 p-1 pr-2 border-2 border-white">
 					<LogoShuffler />
-					<p className="poppins font-medium text-nowrap text-lg">
+					<p className="poppins font-medium text-nowrap text-lg tracking-wide">
 						XUTAO GAO
 					</p>
 				</div>
@@ -91,7 +91,6 @@ const NavigationBar = () => {
 			{navBarBreakpointCheck ? (
 				<div className="flex gap-2">{renderedNavigationButtons}</div>
 			) : null}
-			{/* <SettingsDropdown /> */}
 			{/* Display mobile navigation */}
 			{!navBarBreakpointCheck && showMobileNavigation && (
 				<div
