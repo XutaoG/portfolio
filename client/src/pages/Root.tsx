@@ -33,7 +33,7 @@ const Root = () => {
 							unmountOnExit
 						>
 							<div
-								className="grow container mx-auto flex justify-center"
+								className="grow container mx-auto flex justify-center px-3 md:px-4"
 								ref={nodeRef}
 							>
 								{/* <Outlet /> */}

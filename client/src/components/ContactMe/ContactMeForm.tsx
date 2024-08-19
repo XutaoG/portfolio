@@ -26,11 +26,11 @@ const ContactMeForm = () => {
 
 	return (
 		<form
-			className="p-3 border-neutral-400 bg-neutral-200 dark:bg-neutral-600 dark:border-0
+			className="p-3 border-neutral-400 bg-gray-800
 			flex flex-col gap-4"
 			onSubmit={onMessageSubmit}
 		>
-			<Input title="Full name" placeholder="Xutao Gao" />
+			<Input title="Full Name" placeholder="Xutao Gao" />
 			<Input title="E-mail" placeholder="example@email.com" />
 			<div className="flex flex-col">
 				<TextArea
@@ -38,7 +38,9 @@ const ContactMeForm = () => {
 					placeholder="Enter your message"
 					onChange={onMessageChange}
 				/>
-				<p className="anonymous-pro self-end">{message.length}/2000</p>
+				<p className="inter tracking-wider self-end">
+					{message.length}/2000
+				</p>
 			</div>
 			<div className="self-end">
 				<Button text="/submit" textFont="ibm-plex-mono" />

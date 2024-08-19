@@ -85,7 +85,7 @@ const NavigationBar = () => {
 			</div>
 			{/* Display navigation buttons inside navigation bar when viewport width exceeds breakpoint */}
 			{navBarBreakpointCheck ? (
-				<div className="flex gap-2">{renderedNavigationButtons}</div>
+				<div className="flex gap-4">{renderedNavigationButtons}</div>
 			) : null}
 			{/* Display mobile navigation */}
 			{!navBarBreakpointCheck && (

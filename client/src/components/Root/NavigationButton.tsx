@@ -22,8 +22,8 @@ const NavigationButton = ({
 			"transition-colors duration-300",
 			textFont,
 			{
-				"hover:text-white border-b-2 border-white": selected,
-				"w-auto self-stretch hover:scale-100 text-left": mobile,
+				"hover:text-white bg-blue-600": selected,
+				"w-auto self-stretch hover:scale-100 py-2": mobile,
 			}
 		)
 	);

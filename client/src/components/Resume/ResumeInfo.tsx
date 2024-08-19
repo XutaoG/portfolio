@@ -1,4 +1,3 @@
-import { Fragment } from "react/jsx-runtime";
 import Button from "../Reusable/Button";
 
 interface resumeInfoProps {
@@ -7,16 +6,22 @@ interface resumeInfoProps {
 
 const ResumeInfo = ({ onViewClick }: resumeInfoProps) => {
 	return (
-		<Fragment>
-			<p className="playfair-display text-4xl leading-snug">
+		<div className="w-full md:w-2/5 flex flex-col justify-center gap-6">
+			<p
+				className="architects-daughter-regular text-2xl self-end border border-white px-2 
+				rotate-3 hover:-rotate-3 transition-transform transform-gpu"
+			>
+				View My Resume
+			</p>
+			<p className="moderustic tracking-widest font-bold text-4xl leading-snug">
 				Experience and Qualitifications
 			</p>
-			<p className="crimson-text">
+			<p className="crimson-pro tracking-wide md:text-lg">
 				Explore my professional background, skills, and achievements. My
 				resume provides a detailed overview of my education, experience,
 				expertise, projects, and accomplishments.
 			</p>
-			<p className="crimson-text">
+			<p className="crimson-pro tracking-wide md:text-lg">
 				You can download a PDF version or browse the online version to
 				learn more about my qualifications and how I can contribute to
 				your team.
@@ -31,7 +36,7 @@ const ResumeInfo = ({ onViewClick }: resumeInfoProps) => {
 				/>
 			</div>
 			<p className="ibm-plex-mono self-end">Last Updated: 6/24</p>
-		</Fragment>
+		</div>
 	);
 };
 

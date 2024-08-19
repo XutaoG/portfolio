@@ -24,7 +24,7 @@ const PrimaryInfo = () => {
 					<div className="h-8 w-0.5 bg-white" />
 				</div>
 				<div className="border-2 border-white border-dashed bg-black">
-					<p className="crimson-pro tracking-wide p-3 rotate-0">
+					<p className="crimson-pro tracking-wide p-3 rotate-0 md:text-lg">
 						I am a{" "}
 						<span
 							className="border border-white px-0.5 inline-block

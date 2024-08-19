@@ -23,11 +23,8 @@ const ResumePage = () => {
 				<ResumeModalView />
 			</Modal>
 			{/* Info */}
-			<div className="w-full md:w-2/5 flex flex-col justify-center gap-6">
-				<ResumeInfo onViewClick={handleOpenModal} />
-			</div>
+			<ResumeInfo onViewClick={handleOpenModal} />
 			{/* PDF */}
-
 			<embed
 				className="hidden md:block w-3/5 aspect-[3/4]"
 				src="/src/assets/resume/xutao-gao-resume.pdf"

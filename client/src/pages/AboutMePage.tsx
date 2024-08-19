@@ -4,7 +4,7 @@ import PrimaryInfo from "../components/AboutMe/PrimaryInfo";
 
 const AboutMePage = () => {
 	return (
-		<div className="max-w-[1024px] flex flex-col justify-center gap-4 sm:gap-6 px-3 md:px-4">
+		<div className="max-w-[1024px] flex flex-col justify-center gap-4 sm:gap-6">
 			<div className="flex flex-col gap-4 sm:grid md:grid-cols-2 md:gap-6">
 				{/* Picture */}
 				<img
