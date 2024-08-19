@@ -1,6 +1,5 @@
 import { useOutlet } from "react-router-dom";
 import NavigationBar from "../components/Root/NavigationBar";
-import ScrollBar from "../components/Root/ScrollBar";
 import BackgroundCanvas from "../components/Root/BackgroundCanvas";
 import NextPageButtonContainer from "../components/Reusable/NextPageButtonContainer";
 import { useRef } from "react";
@@ -33,7 +32,7 @@ const Root = () => {
 							unmountOnExit
 						>
 							<div
-								className="grow container mx-auto flex justify-center px-3 md:px-4"
+								className="grow flex justify-center items-center px-3 md:px-4"
 								ref={nodeRef}
 							>
 								{/* <Outlet /> */}
@@ -45,7 +44,6 @@ const Root = () => {
 					<NextPageButtonContainer />
 				</div>
 				{/* Scroll bar container */}
-				<ScrollBar />
 			</div>
 		</div>
 	);

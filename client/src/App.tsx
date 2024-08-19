@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Root from "./pages/Root";
 import "./index.css";
+import LanderPage from "./pages/LanderPage";
 
 // const duration = 300;
 
@@ -29,7 +30,8 @@ import "./index.css";
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Root />}>
-			<Route index={true} element={<AboutMePage />} />
+			<Route index={true} element={<LanderPage />} />
+			<Route path="about-me" element={<AboutMePage />} />
 			<Route path="projects" element={<ProjectsPage />} />
 			<Route path="resume" element={<ResumePage />} />
 			<Route path="contact" element={<ContactMePage />} />

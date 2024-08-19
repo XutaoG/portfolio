@@ -6,12 +6,8 @@ const PrimaryInfo = () => {
 
 	return (
 		<div className="flex flex-col gap-2 sm:gap-4">
-			<p className="architects-daughter-regular text-2xl">
-				Welcome to My Portfolio
-			</p>
-			<p className="architects-daughter-regular text-2xl">Hi, I'm</p>
 			<div className="-rotate-2 transform-gpu">
-				<div className="moderustic tracking-widest font-bold text-7xl">
+				{/* <div className="moderustic tracking-widest font-bold text-7xl">
 					<p className="bg-blue-600 text-white text-right pr-2 border-2 border-white">
 						XUTAO
 					</p>
@@ -22,7 +18,7 @@ const PrimaryInfo = () => {
 				<div className="flex justify-evenly">
 					<div className="h-8 w-0.5 bg-white" />
 					<div className="h-8 w-0.5 bg-white" />
-				</div>
+				</div> */}
 				<div className="border-2 border-white border-dashed bg-black">
 					<p className="crimson-pro tracking-wide p-3 rotate-0 md:text-lg">
 						I am a{" "}

@@ -9,7 +9,7 @@ const NavigationBar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const navBarBreakPoint = 768;
+	const navBarBreakPoint = 900;
 	const navBarBreakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
 
 	const [showMobileNavigation, setShowMobileNavigation] = useState(false);
@@ -26,7 +26,8 @@ const NavigationBar = () => {
 	};
 
 	const navigations = [
-		{ name: "About Me", destination: "/" },
+		{ name: "Lander", destination: "/" },
+		{ name: "About Me", destination: "/about-me" },
 		{ name: "Projects", destination: "/projects" },
 		{ name: "Resume", destination: "/resume" },
 		{ name: "Contact Me", destination: "/contact" },
