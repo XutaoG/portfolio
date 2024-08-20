@@ -9,7 +9,7 @@ const NavigationBar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const navBarBreakPoint = 900;
+	const navBarBreakPoint = 800;
 	const navBarBreakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
 
 	const [showMobileNavigation, setShowMobileNavigation] = useState(false);
@@ -27,10 +27,10 @@ const NavigationBar = () => {
 
 	const navigations = [
 		{ name: "Lander", destination: "/" },
-		{ name: "About Me", destination: "/about-me" },
+		{ name: "About", destination: "/about" },
 		{ name: "Projects", destination: "/projects" },
 		{ name: "Resume", destination: "/resume" },
-		{ name: "Contact Me", destination: "/contact" },
+		{ name: "Contact", destination: "/contact", highlight: true },
 	];
 
 	// * Render all navigation buttons
@@ -44,6 +44,7 @@ const NavigationBar = () => {
 					selected
 					disabled
 					mobile={!navBarBreakpointCheck}
+					highlight={nav.highlight}
 					onClick={() => {
 						navigate(nav.destination);
 					}}
@@ -56,6 +57,7 @@ const NavigationBar = () => {
 				text={nav.name}
 				textFont="poppins"
 				mobile={!navBarBreakpointCheck}
+				highlight={nav.highlight}
 				onClick={() => {
 					navigate(nav.destination);
 				}}
@@ -64,23 +66,30 @@ const NavigationBar = () => {
 	});
 
 	return (
-		<div className="h-10 md:h-12 flex justify-between gap-2 relative z-30 m-2">
+		<div className="h-10 flex justify-between gap-2 relative z-30 m-2">
 			<div className="flex gap-1">
 				{/* Display navigation open button inside navigation bar when viewport width is below breakpoint */}
 				{!navBarBreakpointCheck && (
 					<button
-						className="h-full aspect-square flex justify-center items-center border-2 border-white
-							text-2xl hover:scale-[1.1] transition-transform duration-300"
+						className="h-full aspect-square flex justify-center items-center
+							text-3xl hover:scale-[1.1] transition-transform duration-300"
 						ref={mobileNavigationToggleRef}
 						onClick={toggleShowMobileNavigation}
 					>
 						<MdViewHeadline />
 					</button>
 				)}
-				<div className="h-full flex items-center gap-2 p-1 pr-2 border-2 border-white">
+				<div
+					className="h-full flex items-center gap-2 p-1 pr-2 relative 
+					bg-neutral-950 rounded-md"
+				>
+					<div
+						className="absolute inset-0
+						bg-gradient-to-r from-blue-600 to-purple-600 blur-sm -z-50"
+					/>
 					<LogoShuffler />
-					<p className="poppins font-medium text-nowrap text-lg tracking-wide">
-						XUTAO GAO
+					<p className="moderustic font-medium text-nowrap text-lg tracking-wide">
+						xutaogao.com
 					</p>
 				</div>
 			</div>
@@ -91,14 +100,16 @@ const NavigationBar = () => {
 			{/* Display mobile navigation */}
 			{!navBarBreakpointCheck && (
 				<div
-					className="absolute inset-0 top-[110%] z-30"
+					className="absolute inset-0 top-[120%] z-30"
 					ref={mobileNavigationRef}
 				>
 					<div
-						className={`p-2 flex flex-col gap-2 border-2 border-white bg-neutral-950 scale-y-0 origin-top
+						className={`p-4 rounded-sm flex flex-col gap-2 bg-black/75 scale-y-0 origin-top 
+							border border-white/10 opacity-0
 							${
-								showMobileNavigation && "scale-y-100"
-							} transition-transform duration-500 transform-gpu`}
+								showMobileNavigation &&
+								"scale-y-100 opacity-100"
+							} transition-all duration-500 transform-gpu`}
 					>
 						{renderedNavigationButtons}
 					</div>

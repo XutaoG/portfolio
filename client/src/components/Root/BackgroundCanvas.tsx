@@ -43,8 +43,7 @@ class Point {
 	update = (
 		context: CanvasRenderingContext2D,
 		trackerX: number,
-		trackerY: number,
-		darkMode: boolean
+		trackerY: number
 	) => {
 		// * Only move and display when near tracker radius
 		const distance = distancesq(this.x, this.y, trackerX, trackerY);
@@ -73,7 +72,7 @@ class Point {
 		}
 
 		this.getClosestPoints();
-		this.drawLines(context, darkMode);
+		this.drawLines(context);
 	};
 
 	getClosestPoints = () => {
@@ -126,7 +125,7 @@ class Point {
 	};
 
 	// * Draw lines to closest points
-	drawLines = (context: CanvasRenderingContext2D, darkMode: boolean) => {
+	drawLines = (context: CanvasRenderingContext2D) => {
 		for (const point of this.closest) {
 			// * Check if the line has already been drawn
 			let hasDrawn = false;
@@ -142,13 +141,7 @@ class Point {
 			if (!hasDrawn) {
 				context.beginPath();
 				context.moveTo(this.x, this.y);
-				context.lineTo(point.x, point.y);
-
-				if (darkMode) {
-					context.strokeStyle = `rgba(${darkModeColor.red}, ${darkModeColor.green}, ${darkModeColor.blue}, ${lineOpacity})`;
-				} else {
-					context.strokeStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${lineOpacity})`;
-				}
+				context.strokeStyle = `rgba(${lightModeColor.red}, ${lightModeColor.green}, ${lightModeColor.blue}, ${lineOpacity})`;
 
 				context.stroke();
 			}
@@ -242,15 +235,12 @@ const trackerVelocityY = 0.2;
 
 const lineOpacity = 0.15;
 const lightModeColor = { red: 0, green: 0, blue: 0 };
-const darkModeColor = { red: 255, green: 255, blue: 255 };
 
 let canvasRendered = false;
 let animateOn = false;
-let dark = false;
 
 const BackgroundCanvas = () => {
 	const canvasMode = useAppSelector((state) => state.system.canvasMode);
-	dark = useAppSelector((state) => state.system.darkMode);
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -276,7 +266,7 @@ const BackgroundCanvas = () => {
 				tracker?.update(canvas.width, canvas.height);
 
 				points.forEach((point) =>
-					point.update(context, tracker!.x, tracker!.y, dark)
+					point.update(context, tracker!.x, tracker!.y)
 				);
 
 				if (animateOn) {

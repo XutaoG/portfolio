@@ -1,10 +1,11 @@
 import { useOutlet } from "react-router-dom";
 import NavigationBar from "../components/Root/NavigationBar";
-import BackgroundCanvas from "../components/Root/BackgroundCanvas";
+// import BackgroundCanvas from "../components/Root/BackgroundCanvas";
 import NextPageButtonContainer from "../components/Reusable/NextPageButtonContainer";
 import { useRef } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import BackgroundColumns from "../components/Root/BackgroundColumns";
+import LampBackground from "../components/Root/LampBackground";
 
 const Root = () => {
 	const currentOutlet = useOutlet();
@@ -18,7 +19,8 @@ const Root = () => {
 				transition-colors duration-300 relative`}
 		>
 			<BackgroundColumns />
-			<BackgroundCanvas />
+			{/* <BackgroundCanvas /> */}
+			<LampBackground />
 			<NavigationBar />
 			<div className="grow flex z-20">
 				{/* Content container */}
