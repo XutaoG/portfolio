@@ -9,7 +9,7 @@ const NavigationBar = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const navBarBreakPoint = 800;
+	const navBarBreakPoint = 768;
 	const navBarBreakpointCheck = useBreakpointWidthCheck(navBarBreakPoint);
 
 	const [showMobileNavigation, setShowMobileNavigation] = useState(false);
@@ -67,7 +67,7 @@ const NavigationBar = () => {
 
 	return (
 		<div className="h-10 flex justify-between gap-2 relative z-30 m-2">
-			<div className="flex gap-1">
+			<div className="grow flex gap-1 justify-between">
 				{/* Display navigation open button inside navigation bar when viewport width is below breakpoint */}
 				{!navBarBreakpointCheck && (
 					<button
@@ -89,7 +89,7 @@ const NavigationBar = () => {
 					/>
 					<LogoShuffler />
 					<p className="moderustic font-medium text-nowrap text-lg tracking-wide">
-						xutaogao.com
+						XUTAO GAO
 					</p>
 				</div>
 			</div>

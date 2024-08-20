@@ -1,37 +1,34 @@
 import { useState } from "react";
-import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import GlowPanel from "../Reusable/GlowPanel";
 
-const GitHubPanel = () => {
+const LinkedInPanel = () => {
 	const [onHover, setOnHover] = useState(false);
 
-	const onGitHubHoverEnter = () => {
+	const onMouseEnter = () => {
 		setOnHover(true);
 	};
 
-	const onGitHubHoverLeave = () => {
+	const onMouseLeave = () => {
 		setOnHover(false);
 	};
 
 	return (
 		<GlowPanel
-			className="h-full flex flex-col gap-3 items-center justify-center 
-			inter text-white hover:cursor-pointer"
-			onMouseEnter={onGitHubHoverEnter}
-			onMouseLeave={onGitHubHoverLeave}
-			onClick={() => {
-				window.open("https://github.com/XutaoG", "_blank");
-			}}
+			className="h-full flex flex-col items-center justify-center 
+			gap-1 inter text-white hover:cursor-pointer"
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
 		>
-			<div className="absolute inset-16 bg-white/50 blur-2xl" />
+			<div className="absolute inset-16 bg-blue-600 blur-2xl" />
 			<p
 				className={`font-light tracking-widest ${
 					onHover && "-translate-y-4"
 				} transition-transform transform-gpu`}
 			>
-				GitHub
+				LinkedIn
 			</p>
-			<FaGithub
+			<FaLinkedin
 				className={`text-2xl lg:text-3xl xl:text-5xl opacity-100 ${
 					onHover && "scale-125 -translate-y-4"
 				} transition-transform transform-gpu`}
@@ -46,4 +43,4 @@ const GitHubPanel = () => {
 	);
 };
 
-export default GitHubPanel;
+export default LinkedInPanel;

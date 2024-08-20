@@ -1,11 +1,9 @@
 import { useOutlet } from "react-router-dom";
 import NavigationBar from "../components/Root/NavigationBar";
-// import BackgroundCanvas from "../components/Root/BackgroundCanvas";
-import NextPageButtonContainer from "../components/Reusable/NextPageButtonContainer";
 import { useRef } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import BackgroundColumns from "../components/Root/BackgroundColumns";
-import LampBackground from "../components/Root/LampBackground";
+import BackgroundImages from "../components/Root/BackgroundImages";
 
 const Root = () => {
 	const currentOutlet = useOutlet();
@@ -18,9 +16,9 @@ const Root = () => {
 				text-white bg-neutral-950
 				transition-colors duration-300 relative`}
 		>
+			<BackgroundImages />
 			<BackgroundColumns />
 			{/* <BackgroundCanvas /> */}
-			<LampBackground />
 			<NavigationBar />
 			<div className="grow flex z-20">
 				{/* Content container */}
@@ -42,8 +40,6 @@ const Root = () => {
 							</div>
 						</CSSTransition>
 					</SwitchTransition>
-					{/* Down arrow container */}
-					<NextPageButtonContainer />
 				</div>
 				{/* Scroll bar container */}
 			</div>

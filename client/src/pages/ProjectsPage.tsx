@@ -50,7 +50,7 @@ const ProjectsPage = () => {
 	return projects === null ? (
 		<LoadingIndicator />
 	) : (
-		<div className="w-full flex flex-col gap-2 sm:grid sm:grid-cols-2 xl:grid-cols-3 content-center">
+		<div className="container w-full flex flex-col gap-2 sm:grid sm:grid-cols-2 xl:grid-cols-3 content-center">
 			{/* Modal */}
 			<Modal show={showModal} onClose={handleCloseModal}>
 				{openedProjectId == null || (

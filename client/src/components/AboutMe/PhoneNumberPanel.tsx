@@ -1,7 +1,7 @@
 import { useState } from "react";
 import GlowPanel from "../Reusable/GlowPanel";
 
-const EmailPanel = () => {
+const PhoneNumberPanel = () => {
 	const [showCopyHint, setShowCopyHint] = useState(false);
 
 	const onEmailHoverEnter = () => {
@@ -12,8 +12,8 @@ const EmailPanel = () => {
 		setShowCopyHint(false);
 	};
 
-	const copyEmail = () => {
-		navigator.clipboard.writeText("xu611268@ucf.edu");
+	const copyPhoneNumber = () => {
+		navigator.clipboard.writeText("6462993176");
 	};
 
 	return (
@@ -22,21 +22,21 @@ const EmailPanel = () => {
 			gap-1 inter text-white hover:cursor-pointer"
 			onMouseEnter={onEmailHoverEnter}
 			onMouseLeave={onEmailHoverLeave}
-			onClick={copyEmail}
+			onClick={copyPhoneNumber}
 		>
 			<p
 				className={`font-light tracking-widest ${
 					showCopyHint && "-translate-y-2"
 				} transition-transform transform-gpu`}
 			>
-				Email
+				Phone Number
 			</p>
 			<p
 				className={`text-xl md:text-2xl tracking-wider font-light ${
 					showCopyHint && "-translate-y-2"
 				} transition-transform transform-gpu`}
 			>
-				xu611268@ucf.edu
+				(646) 299-3176
 			</p>
 			<p
 				className={`absolute bottom-2 md:bottom-4 text-sm tracking-wide opacity-0 ${
@@ -49,4 +49,4 @@ const EmailPanel = () => {
 	);
 };
 
-export default EmailPanel;
+export default PhoneNumberPanel;

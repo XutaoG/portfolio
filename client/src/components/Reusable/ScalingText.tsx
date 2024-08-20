@@ -1,22 +1,51 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-interface ScalingNameProps {
+interface ScalingTextProps {
 	text: string;
+	textStyle?: string;
+	constantFlow?: boolean;
 }
 
-const ScalingName = ({ text }: ScalingNameProps) => {
-	const [focusIndex, setFocusIndex] = useState<null | number>(null);
-	const firstName = text;
+const ScalingText = ({ text, textStyle, constantFlow }: ScalingTextProps) => {
+	const initialIndexValue = constantFlow ? 0 : null;
+	const [focusIndex, setFocusIndex] = useState<null | number>(
+		initialIndexValue
+	);
+	const flowDirection = useRef(1);
 
 	const onCharacterMouseEnter = (index: number) => {
+		if (constantFlow) {
+			return;
+		}
 		setFocusIndex(index);
 	};
 
 	const onTextMouseLeave = () => {
+		if (constantFlow) {
+			return;
+		}
 		setFocusIndex(null);
 	};
 
-	const firstNameLine = Array.from(firstName).map((c, index) => {
+	useEffect(() => {
+		if (!constantFlow || focusIndex === null) {
+			return;
+		}
+
+		const interval = setInterval(() => {
+			setFocusIndex(focusIndex + flowDirection.current);
+			if (
+				focusIndex + flowDirection.current === text.length - 1 ||
+				focusIndex + flowDirection.current === 0
+			) {
+				flowDirection.current *= -1;
+			}
+		}, 125);
+
+		return () => clearInterval(interval);
+	}, [constantFlow, focusIndex, text.length]);
+
+	const firstNameLine = Array.from(text).map((c, index) => {
 		let scaleStyle = "";
 		let colorStyle = "";
 
@@ -51,7 +80,7 @@ const ScalingName = ({ text }: ScalingNameProps) => {
 
 	return (
 		<div
-			className="flex moderustic font-bold text-7xl sm:text-9xl pl-4"
+			className={`flex ${textStyle} cursor-default`}
 			onMouseLeave={onTextMouseLeave}
 		>
 			{firstNameLine}
@@ -59,4 +88,4 @@ const ScalingName = ({ text }: ScalingNameProps) => {
 	);
 };
 
-export default ScalingName;
+export default ScalingText;

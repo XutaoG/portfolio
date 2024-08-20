@@ -1,34 +1,38 @@
 import { useState } from "react";
+import GlowPanel from "../Reusable/GlowPanel";
 
 const AgePanel = () => {
-	const ageInYear =
-		new Date(Date.now() - new Date(2004, 4, 2).getTime()).getUTCFullYear() -
-		1970;
+	const [onHover, setOnHover] = useState(false);
 
-	const ageInDays = Math.floor(
-		(Date.now() - new Date(2004, 4, 2).getTime()) / 1000 / 60 / 60 / 24
-	);
-	const [ageText, setAgeText] = useState(`${ageInYear} yr`);
-
-	const displayAgeInDays = () => {
-		setAgeText(`${ageInDays} days`);
+	const onMouseEnter = () => {
+		setOnHover(true);
 	};
 
-	const displayAgeInYears = () => {
-		setAgeText(`${ageInYear} yr`);
+	const onMouseLeave = () => {
+		setOnHover(false);
 	};
+
 	return (
-		<div
-			className="size-full flex flex-col items-center justify-center 
-			gap-1 bg-gray-800 rounded-md inter text-white"
-			onMouseEnter={displayAgeInDays}
-			onMouseLeave={displayAgeInYears}
+		<GlowPanel
+			className="size-full flex flex-col items-center justify-center gap-1
+			inter text-white cursor-default"
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
 		>
 			<p className="font-light tracking-widest">Age</p>
-			<p className="text-xl md:text-2xl tracking-wider font-ligh text-center">
-				{ageText}
-			</p>
-		</div>
+			<div className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text">
+				<p
+					className={`text-2xl md:text-4xl w-full inset-x-0 text-center ${
+						onHover
+							? "text-transparent font-semibold"
+							: "text-white"
+					}`}
+				>
+					20
+				</p>
+			</div>
+			<p className="font-light text-sm tracking-widest">Years Old</p>
+		</GlowPanel>
 	);
 };
 
