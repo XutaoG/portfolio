@@ -13,15 +13,17 @@ const GitHubPanel = () => {
 		setOnHover(false);
 	};
 
+	const openLink = () => {
+		window.open("https://github.com/XutaoG", "_blank");
+	};
+
 	return (
 		<GlowPanel
 			className="h-full flex flex-col gap-3 items-center justify-center 
 			inter text-white hover:cursor-pointer"
 			onMouseEnter={onGitHubHoverEnter}
 			onMouseLeave={onGitHubHoverLeave}
-			onClick={() => {
-				window.open("https://github.com/XutaoG", "_blank");
-			}}
+			onClick={openLink}
 		>
 			<div className="absolute inset-16 bg-white/50 blur-2xl" />
 			<p

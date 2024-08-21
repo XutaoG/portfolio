@@ -1,8 +1,11 @@
 import { useState } from "react";
 import GlowPanel from "../Reusable/GlowPanel";
+import { useAppDispatch } from "../../hooks";
+import { addAlert } from "../../store/slices/alertSlice";
 
 const PhoneNumberPanel = () => {
 	const [showCopyHint, setShowCopyHint] = useState(false);
+	const dispatch = useAppDispatch();
 
 	const onEmailHoverEnter = () => {
 		setShowCopyHint(true);
@@ -14,6 +17,14 @@ const PhoneNumberPanel = () => {
 
 	const copyPhoneNumber = () => {
 		navigator.clipboard.writeText("6462993176");
+		dispatch(
+			addAlert({
+				id: "",
+				message: "Phone number copied",
+				textStyle: "text-green-500",
+				expireTimer: 3000,
+			})
+		);
 	};
 
 	return (

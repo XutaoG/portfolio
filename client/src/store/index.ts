@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { systemSliceReducer } from "./slices/systemSlice";
+import { alertSliceReducer } from "./slices/alertSlice";
 
 const store = configureStore({
 	reducer: {
-		system: systemSliceReducer,
+		alerts: alertSliceReducer,
 	},
 });
 

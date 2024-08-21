@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import BackgroundColumns from "../components/Root/BackgroundColumns";
 import BackgroundImages from "../components/Root/BackgroundImages";
+import AlertCenter from "../components/Root/AlertCenter";
 
 const Root = () => {
 	const currentOutlet = useOutlet();
@@ -18,8 +19,8 @@ const Root = () => {
 		>
 			<BackgroundImages />
 			<BackgroundColumns />
-			{/* <BackgroundCanvas /> */}
 			<NavigationBar />
+			<AlertCenter />
 			<div className="grow flex z-20">
 				{/* Content container */}
 				<div className="grow flex flex-col gap-4">
@@ -41,7 +42,6 @@ const Root = () => {
 						</CSSTransition>
 					</SwitchTransition>
 				</div>
-				{/* Scroll bar container */}
 			</div>
 		</div>
 	);

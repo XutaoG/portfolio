@@ -1,8 +1,11 @@
 import { useState } from "react";
 import GlowPanel from "../Reusable/GlowPanel";
+import { useAppDispatch } from "../../hooks";
+import { addAlert } from "../../store/slices/alertSlice";
 
 const EmailPanel = () => {
 	const [showCopyHint, setShowCopyHint] = useState(false);
+	const dispatch = useAppDispatch();
 
 	const onEmailHoverEnter = () => {
 		setShowCopyHint(true);
@@ -14,6 +17,14 @@ const EmailPanel = () => {
 
 	const copyEmail = () => {
 		navigator.clipboard.writeText("xu611268@ucf.edu");
+		dispatch(
+			addAlert({
+				id: "",
+				message: "E-mail copied",
+				textStyle: "text-green-500",
+				expireTimer: 3000,
+			})
+		);
 	};
 
 	return (

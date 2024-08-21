@@ -1,20 +1,22 @@
+import DarkenedPanel from "../Reusable/DarkenedPanel";
 import ScalingText from "../Reusable/ScalingText";
 
 const PrimaryInfo = () => {
 	return (
 		<div className="flex flex-col gap-10 items-center">
-			<div className="flex justify-center gap-x-10 gap-y-4 flex-wrap">
-				<ScalingText
-					text="ABOUT"
-					textStyle="moderustic font-bold text-5xl sm:text-7xl"
-				/>
-				<ScalingText
-					text="ME"
-					textStyle="moderustic font-bold text-5xl sm:text-7xl"
-				/>
-			</div>
-			<div className="relative">
-				<div className="absolute inset-0 bg-black/80 blur-lg -z-50" />
+			<DarkenedPanel>
+				<div className="flex justify-center gap-x-10 gap-y-4 flex-wrap">
+					<ScalingText
+						text="ABOUT"
+						textStyle="moderustic font-bold text-5xl sm:text-7xl"
+					/>
+					<ScalingText
+						text="ME"
+						textStyle="moderustic font-bold text-5xl sm:text-7xl"
+					/>
+				</div>
+			</DarkenedPanel>
+			<DarkenedPanel>
 				<p
 					className={`text-lg max-w-[640px] inter tracking-wide leading-7 font-light`}
 				>
@@ -26,7 +28,7 @@ const PrimaryInfo = () => {
 					leading projects that bring innovative ideas to life, and
 					I'm committed to continuous learning and personal growth.
 				</p>
-			</div>
+			</DarkenedPanel>
 		</div>
 	);
 };

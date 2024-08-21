@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import GlowPanel from "../Reusable/GlowPanel";
+import { useDispatch } from "react-redux";
+import { addAlert } from "../../store/slices/alertSlice";
 
 const LinkedInPanel = () => {
 	const [onHover, setOnHover] = useState(false);
+	const dispatch = useDispatch();
 
 	const onMouseEnter = () => {
 		setOnHover(true);
@@ -13,12 +16,24 @@ const LinkedInPanel = () => {
 		setOnHover(false);
 	};
 
+	const openLink = () => {
+		dispatch(
+			addAlert({
+				id: "",
+				message: "My LinkedIn will be available soon",
+				textStyle: "text-red-500",
+				expireTimer: 5000,
+			})
+		);
+	};
+
 	return (
 		<GlowPanel
 			className="h-full flex flex-col items-center justify-center 
 			gap-1 inter text-white hover:cursor-pointer"
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
+			onClick={openLink}
 		>
 			<div className="absolute inset-16 bg-blue-600 blur-2xl" />
 			<p

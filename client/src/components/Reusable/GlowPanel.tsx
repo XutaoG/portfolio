@@ -1,10 +1,8 @@
 import classNames from "classnames";
-import { ComponentPropsWithoutRef, ReactNode } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface GlowPanelProps extends ComponentPropsWithoutRef<"div"> {
-	children: ReactNode;
-}
+interface GlowPanelProps extends ComponentPropsWithoutRef<"div"> {}
 
 const GlowPanel = ({ children, className, ...rest }: GlowPanelProps) => {
 	const styles = twMerge(
