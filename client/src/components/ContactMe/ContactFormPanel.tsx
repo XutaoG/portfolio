@@ -3,8 +3,12 @@ import Button from "../Reusable/Button";
 import Input from "../Reusable/Input";
 import TextArea from "../Reusable/TextArea";
 import GlowPanel from "../Reusable/GlowPanel";
+import { useDispatch } from "react-redux";
+import { setAlert } from "../../store/slices/alertSlice";
 
 const ContactFormPanel = () => {
+	const dispatch = useDispatch();
+
 	// const [fullNameValue, setFullNameValue] = useState("");
 	// const [emailValue, setEmailValue] = useState("");
 	const [message, setMessage] = useState("");
@@ -23,6 +27,13 @@ const ContactFormPanel = () => {
 
 	const onMessageSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		dispatch(
+			setAlert({
+				message: "Feature coming soon",
+				textStyle: "text-red-500",
+				expireTimer: 3000,
+			})
+		);
 	};
 
 	return (
