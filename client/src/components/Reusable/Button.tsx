@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface buttonProps extends ComponentPropsWithoutRef<"button"> {
@@ -21,6 +21,16 @@ const Button = ({
 	fill,
 	...rest
 }: buttonProps) => {
+	const [onHover, setOnHover] = useState(false);
+
+	const onMouseEnter = () => {
+		setOnHover(true);
+	};
+
+	const onMouseLeave = () => {
+		setOnHover(false);
+	};
+
 	const buttonStyles = twMerge(
 		classNames(
 			"py-0.5 px-2 border-white rounded-lg",
@@ -32,12 +42,18 @@ const Button = ({
 				"px-3 py-1 text-lg hover:scale-[1.05]": large,
 				"w-32": fixedWidth,
 				"hover:scale-100": disableHover,
+				"from-blue-600/90 to-purple-600/90": onHover,
 			}
 		)
 	);
 
 	return (
-		<button className={buttonStyles} {...rest}>
+		<button
+			className={buttonStyles}
+			{...rest}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+		>
 			<p className="text-nowrap">{text}</p>
 		</button>
 	);
