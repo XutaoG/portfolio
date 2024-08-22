@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useBreakpointWidthCheck } from "../../hooks";
 import { Project } from "../../models/project";
 
@@ -11,34 +12,69 @@ const ProjectTile = ({ project, handleOpenModal }: projectTileProps) => {
 	const subheadingBreakpointCheck =
 		useBreakpointWidthCheck(subheadingBreakpoint);
 
+	const [onHover, setOnHover] = useState(false);
+
+	const onMouseEnter = () => {
+		setOnHover(true);
+	};
+
+	const onMouseLeave = () => {
+		setOnHover(false);
+	};
+
 	return (
 		<div
-			className={`w-full flex flex-col gap-1 cursor-pointer
-			p-3 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-800
-			hover:scale-[1.03] transition-transform duration-300`}
+			className={`p-1 rounded-lg
+			${
+				onHover
+					? "bg-gradient-to-r from-blue-600/40 to-purple-600/40"
+					: "bg-neutral-950"
+			}
+			hover:scale-[1.02] transition-transform transform-gpu`}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
 			onClick={() => {
 				handleOpenModal(project._id);
 			}}
 		>
-			{/* Demo */}
-			<div className="aspect-video grow rounded-md overflow-hidden border border-neutral-400">
-				<img src={project.images[0]} />
-			</div>
-			{/* Description */}
-			<div className="flex flex-col">
-				<div className="flex justify-between items-start">
-					<p className="poppins font-semibold text-lg">
-						{project.title}
-					</p>
-					<p className="poppins font-semibold text-lg">
-						{new Date(project.endDate).getFullYear()}
-					</p>
+			<div className="rounded-md flex flex-col gap-2 cursor-pointer bg-neutral-950 p-3">
+				{/* Demo */}
+				<div className="aspect-video grow rounded-sm overflow-hidden relative border border-white/20">
+					<img src={project.images[0]} />
+					<div className="absolute inset-0 bg-black/20" />
 				</div>
-				{subheadingBreakpointCheck && (
-					<p className="ibm-plex-mono text-neutral-600 dark:text-neutral-400">
-						{project.projectType.toUpperCase()}
-					</p>
-				)}
+				{/* Description */}
+				<div className="flex flex-col">
+					<div className="flex justify-between items-start">
+						<div className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text">
+							<p
+								className={`inter text-xl tracking-wider ${
+									onHover
+										? "text-transparent font-black"
+										: "text-white font-semibold"
+								}`}
+							>
+								{project.title}
+							</p>
+						</div>
+						<div className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text">
+							<p
+								className={`inter text-xl tracking-wider  ${
+									onHover
+										? "text-transparent font-black"
+										: "text-white font-semibold"
+								}`}
+							>
+								{new Date(project.endDate).getFullYear()}
+							</p>
+						</div>
+					</div>
+					{subheadingBreakpointCheck && (
+						<p className="moderustic text-white/50 tracking-wider">
+							{project.projectType.toUpperCase()}
+						</p>
+					)}
+				</div>
 			</div>
 		</div>
 	);

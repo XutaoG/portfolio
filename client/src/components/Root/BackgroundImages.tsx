@@ -12,7 +12,7 @@ const BackgroundImages = () => {
 	}
 
 	return (
-		<div className="absolute inset-0 flex flex-col gap-16 justify-between">
+		<div className="absolute inset-0 flex flex-col gap-16 justify-between items-center">
 			{/* Lamp */}
 			<img className="h-96 object-contain" src={lamp} />
 			{/* Laptop */}

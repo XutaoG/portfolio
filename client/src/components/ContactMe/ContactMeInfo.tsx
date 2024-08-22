@@ -1,68 +1,52 @@
-import Button from "../Reusable/Button";
-import { useState } from "react";
+import ScalingText from "../Reusable/ScalingText";
+import DarkenedPanel from "../Reusable/DarkenedPanel";
+import LinkedInPanel from "../AboutMe/LinkedInPanel";
+import ContactEmailPanel from "./ContactEmailPanel";
+import ContactGitHubPanel from "./ContactGitHubPanel";
+import ContactPhoneNumberPanel from "./ContactPhoneNumberPanel";
+import ContactFormPanel from "./ContactFormPanel";
 
 const ContactMeInfo = () => {
-	const [emailText, setEmailText] = useState("/E-mail");
-
-	const showEmail = () => {
-		setEmailText("xu611268@ucf.edu");
-	};
-
-	const hideEmail = () => {
-		setEmailText("/E-mail");
-	};
-
-	const copyEmail = () => {
-		navigator.clipboard.writeText("xu611268@ucf.edu");
-		setEmailText("Copied");
-	};
-
 	return (
-		<div className="max-w-[640px] flex flex-col justify-center gap-6">
-			<p
-				className="architects-daughter-regular text-2xl self-end border border-white px-2 
-				rotate-3 hover:-rotate-3 transition-transform transform-gpu"
-			>
-				Message Me !
-			</p>
-			<p className="moderustic tracking-widest font-bold text-4xl leading-snug">
-				Get in Touch!
-			</p>
-			<p className="crimson-pro tracking-wide md:text-lg">
-				I'd love to hear from you! Whether you have questions,
-				collaboration ideas, or job opportunities, feel free to reach
-				out. You can contact me via email or connect with me on LinkedIn
-				or GitHub.
-			</p>
-			<p className="crimson-pro tracking-wide md:text-lg">
-				For your convenience, there's also a contact form below. Looking
-				forward to connecting with you!
-			</p>
-			<div className="flex flex-col gap-4">
-				<Button
-					text={emailText}
-					textFont="ibm-plex-mono"
-					fill
-					onMouseOver={showEmail}
-					onMouseLeave={hideEmail}
-					onClick={copyEmail}
+		<div className="max-w-[640px] flex flex-col justify-center gap-12">
+			<DarkenedPanel className="flex justify-between flex-wrap">
+				<ScalingText
+					text="CONTACT"
+					textStyle="moderustic font-bold text-4xl sm:text-6xl"
 				/>
-				<Button
-					text="/GitHub"
-					textFont="ibm-plex-mono"
-					fill
-					onClick={() => {
-						window.open("https://github.com/XutaoG", "_blank");
-					}}
+				<ScalingText
+					text="ME"
+					textStyle="moderustic font-bold text-4xl sm:text-6xl"
 				/>
-				<Button
-					text="/LinkedIn"
-					textFont="ibm-plex-mono"
-					fill
-					onClick={() => {
-						window.open("https://google.com", "_blank");
-					}}
-				/>
+			</DarkenedPanel>
+			<DarkenedPanel className="flex flex-col gap-4 text-lg inter tracking-wide leading-7 font-light">
+				<p>
+					I'd love to hear from you! Whether you have questions,
+					collaboration ideas, or job opportunities, feel free to
+					reach out. You can contact me via email or connect with me
+					on LinkedIn or GitHub.
+				</p>
+				<p>
+					For your convenience, there's also a contact form below.
+					Looking forward to connecting with you!
+				</p>
+			</DarkenedPanel>
+			<div className="grid grid-cols-2 grid-rows-7 md:grid-cols-5 md:grid-rows-7 gap-3 md:gap-5">
+				<div className="col-span-1 row-span-1 md:col-span-1 md:row-span-2">
+					<ContactGitHubPanel />
+				</div>
+				<div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1">
+					<LinkedInPanel />
+				</div>
+				<div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1">
+					<ContactPhoneNumberPanel />
+				</div>
+				<div className="col-span-2 row-span-1 md:col-span-4 md:row-span-1 h-24 md:h-32">
+					<ContactEmailPanel />
+				</div>
+				<div className="col-span-2 row-span-5 md:col-span-5 md:row-span-5">
+					<ContactFormPanel />
+				</div>
 			</div>
 		</div>
 	);

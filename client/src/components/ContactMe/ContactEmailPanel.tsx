@@ -3,7 +3,7 @@ import GlowPanel from "../Reusable/GlowPanel";
 import { useAppDispatch } from "../../hooks";
 import { setAlert } from "../../store/slices/alertSlice";
 
-const EmailPanel = () => {
+const ContactEmailPanel = () => {
 	const [showCopyHint, setShowCopyHint] = useState(false);
 	const dispatch = useAppDispatch();
 
@@ -59,4 +59,4 @@ const EmailPanel = () => {
 	);
 };
 
-export default EmailPanel;
+export default ContactEmailPanel;

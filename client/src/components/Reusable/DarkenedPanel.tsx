@@ -12,7 +12,7 @@ const DarkenedPanel = ({
 	const styles = twMerge(classNames("relative"), className);
 	return (
 		<div className={styles} {...rest}>
-			<div className="absolute inset-0 bg-black/80 blur-lg -z-50" />
+			<div className="absolute inset-0 bg-black/60 blur-lg -z-50" />
 			{children}
 		</div>
 	);

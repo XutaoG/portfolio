@@ -5,7 +5,7 @@ interface inputProps {
 
 const Input = ({ title, placeholder }: inputProps) => {
 	return (
-		<div className="py-1 px-2 flex flex-col border-2 border-white bg-neutral-950">
+		<div className="p-1 px-2 md:py-2 flex flex-col md:gap-1 border-2 border-white/20 rounded-lg">
 			<p className="inter text-xs tracking-widest">{title}</p>
 			<input
 				className="bg-transparent inter tracking-wide focus:outline-0"

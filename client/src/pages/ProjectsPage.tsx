@@ -6,11 +6,14 @@ import { Project } from "../models/project";
 
 import axios from "axios";
 import LoadingIndicator from "../components/Reusable/LoadingIndicator";
-import { useChangePageByScroll } from "../hooks";
+import DarkenedPanel from "../components/Reusable/DarkenedPanel";
+import { GiArrowCursor } from "react-icons/gi";
+import ProjectOverviewText from "../components/Projects/ProjectOverviewText";
+import { useNavigate } from "react-router-dom";
+import GlowButton from "../components/Reusable/GlowButton";
 
 const ProjectsPage = () => {
-	useChangePageByScroll("/", "/resume");
-
+	const navigate = useNavigate();
 	const [showModal, setShowModal] = useState(false);
 	const [openedProjectId, setOpenedProjectId] = useState<string | null>(null);
 
@@ -33,6 +36,10 @@ const ProjectsPage = () => {
 		retrieveAllProjects();
 	}, [retrieveAllProjects]);
 
+	const goToResumePage = () => {
+		navigate("/resume");
+	};
+
 	const handleCloseModal = () => {
 		setShowModal(false);
 	};
@@ -50,15 +57,34 @@ const ProjectsPage = () => {
 	return projects === null ? (
 		<LoadingIndicator />
 	) : (
-		<div className="container w-full flex flex-col gap-2 sm:grid sm:grid-cols-2 xl:grid-cols-3 content-center">
-			{/* Modal */}
-			<Modal show={showModal} onClose={handleCloseModal}>
-				{openedProjectId == null || (
-					<ProjectModalView projectId={openedProjectId!} />
-				)}
-			</Modal>
+		<div className="container flex flex-col items-center gap-10 pb-4">
+			<ProjectOverviewText />
 			{/* Projects */}
-			{renderedProjectTiles}
+			<div className="w-full flex flex-col gap-2 lg:gap-4 sm:grid lg:grid-cols-2 2xl:grid-cols-3 bg-neutral-950">
+				{/* Modal */}
+				<Modal show={showModal} onClose={handleCloseModal}>
+					{openedProjectId == null || (
+						<ProjectModalView projectId={openedProjectId!} />
+					)}
+				</Modal>
+				{renderedProjectTiles}
+			</div>
+			{/* Transition to Resume */}
+			<div className="flex flex-col gap-8 items-center">
+				<DarkenedPanel className="flex flex-col gap-4">
+					<p
+						className={`text-lg inter tracking-wider leading-7 font-light`}
+					>
+						See what I've been up to?
+					</p>
+				</DarkenedPanel>
+				<GlowButton onClick={goToResumePage}>
+					<p className="inter tracking-widest text-lg sm:text-xl font-light">
+						Check Out My Resume
+					</p>
+					<GiArrowCursor className="text-xl -rotate-[20deg] animate-bounce" />
+				</GlowButton>
+			</div>
 		</div>
 	);
 };

@@ -4,7 +4,7 @@ import GlowPanel from "../Reusable/GlowPanel";
 import { useDispatch } from "react-redux";
 import { setAlert } from "../../store/slices/alertSlice";
 
-const LinkedInPanel = () => {
+const ContactLinkedInPanel = () => {
 	const [onHover, setOnHover] = useState(false);
 	const dispatch = useDispatch();
 
@@ -57,4 +57,4 @@ const LinkedInPanel = () => {
 	);
 };
 
-export default LinkedInPanel;
+export default ContactLinkedInPanel;

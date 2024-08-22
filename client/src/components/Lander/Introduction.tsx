@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { GiArrowCursor } from "react-icons/gi";
 import ScalingText from "../Reusable/ScalingText";
 import DarkenedPanel from "../Reusable/DarkenedPanel";
+import GlowButton from "../Reusable/GlowButton";
 
 const Introduction = () => {
 	const navigate = useNavigate();
@@ -44,21 +45,14 @@ const Introduction = () => {
 					/>
 				</DarkenedPanel>
 			</div>
-			<button
-				className="mt-36 px-5 py-2 rounded-full bg-neutral-950 relative"
-				onClick={goToAboutMePage}
-			>
-				<div
-					className="absolute inset-0 rounded-full
-					bg-gradient-to-r from-blue-600 to-purple-600 blur-md -z-50"
-				/>
-				<div className="flex gap-2 items-center">
+			<div className="mt-40">
+				<GlowButton onClick={goToAboutMePage}>
 					<p className="inter tracking-widest text-lg sm:text-xl font-light">
 						Let's Get to Know Me
 					</p>
 					<GiArrowCursor className="text-xl -rotate-[20deg] animate-bounce" />
-				</div>
-			</button>
+				</GlowButton>
+			</div>
 		</div>
 	);
 };

@@ -16,7 +16,7 @@ const ResumePage = () => {
 	return (
 		<div
 			className="max-w-[1280px] flex flex-col justify-center gap-2 
-			md:flex-row md:items-center md:gap-6"
+			md:flex-row md:items-center md:gap-6 pb-4"
 		>
 			{/* Modal */}
 			<Modal show={showModal} onClose={handleCloseModal}>

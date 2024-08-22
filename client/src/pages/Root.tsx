@@ -20,7 +20,7 @@ const Root = () => {
 			<BackgroundImages />
 			<BackgroundColumns />
 			<NavigationBar />
-			<AlertCenter />
+			{/* <AlertCenter /> */}
 			<div className="grow flex z-20">
 				{/* Content container */}
 				<div className="grow flex flex-col gap-4">
