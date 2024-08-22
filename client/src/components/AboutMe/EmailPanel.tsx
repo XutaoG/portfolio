@@ -21,7 +21,7 @@ const EmailPanel = () => {
 			setAlert({
 				message: "E-mail copied",
 				textStyle: "text-green-500",
-				expireTimer: 3000,
+				expireTimer: 2000,
 			})
 		);
 	};

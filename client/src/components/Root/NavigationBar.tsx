@@ -4,6 +4,7 @@ import NavigationButton from "./NavigationButton";
 import { MdViewHeadline } from "react-icons/md";
 import { useBreakpointWidthCheck, useOutsideClick } from "../../hooks";
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const NavigationBar = () => {
 	const navigate = useNavigate();
@@ -79,7 +80,7 @@ const NavigationBar = () => {
 						<MdViewHeadline />
 					</button>
 				)}
-				<div
+				<motion.div
 					className="h-full flex items-center gap-2 p-1 pr-2 relative 
 					bg-neutral-950 rounded-md"
 				>
@@ -91,7 +92,7 @@ const NavigationBar = () => {
 					<p className="moderustic font-medium text-nowrap text-lg tracking-wide">
 						XUTAO GAO
 					</p>
-				</div>
+				</motion.div>
 			</div>
 			{/* Display navigation buttons inside navigation bar when viewport width exceeds breakpoint */}
 			{navBarBreakpointCheck ? (

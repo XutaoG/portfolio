@@ -21,7 +21,7 @@ const PhoneNumberPanel = () => {
 			setAlert({
 				message: "Phone number copied",
 				textStyle: "text-green-500",
-				expireTimer: 3000,
+				expireTimer: 2000,
 			})
 		);
 	};

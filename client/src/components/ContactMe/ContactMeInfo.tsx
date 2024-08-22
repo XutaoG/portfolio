@@ -1,10 +1,10 @@
 import ScalingText from "../Reusable/ScalingText";
 import DarkenedPanel from "../Reusable/DarkenedPanel";
 import LinkedInPanel from "../AboutMe/LinkedInPanel";
-import ContactEmailPanel from "./ContactEmailPanel";
-import ContactGitHubPanel from "./ContactGitHubPanel";
-import ContactPhoneNumberPanel from "./ContactPhoneNumberPanel";
 import ContactFormPanel from "./ContactFormPanel";
+import GitHubPanel from "../AboutMe/GitHubPanel";
+import PhoneNumberPanel from "../AboutMe/PhoneNumberPanel";
+import EmailPanel from "../AboutMe/EmailPanel";
 
 const ContactMeInfo = () => {
 	return (
@@ -33,16 +33,16 @@ const ContactMeInfo = () => {
 			</DarkenedPanel>
 			<div className="grid grid-cols-2 grid-rows-7 md:grid-cols-5 md:grid-rows-7 gap-3 md:gap-5">
 				<div className="col-span-1 row-span-1 md:col-span-1 md:row-span-2">
-					<ContactGitHubPanel />
+					<GitHubPanel />
 				</div>
 				<div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1">
 					<LinkedInPanel />
 				</div>
 				<div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1">
-					<ContactPhoneNumberPanel />
+					<PhoneNumberPanel />
 				</div>
 				<div className="col-span-2 row-span-1 md:col-span-4 md:row-span-1 h-24 md:h-32">
-					<ContactEmailPanel />
+					<EmailPanel />
 				</div>
 				<div className="col-span-2 row-span-5 md:col-span-5 md:row-span-5">
 					<ContactFormPanel />

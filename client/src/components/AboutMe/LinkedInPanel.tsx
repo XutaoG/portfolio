@@ -21,7 +21,7 @@ const LinkedInPanel = () => {
 			setAlert({
 				message: "My LinkedIn will be available soon",
 				textStyle: "text-red-500",
-				expireTimer: 5000,
+				expireTimer: 3000,
 			})
 		);
 	};
