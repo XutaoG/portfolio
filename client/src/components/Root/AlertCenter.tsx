@@ -50,7 +50,7 @@ const AlertCenter = () => {
 
 	return (
 		<div
-			className={`absolute w-72 h-24 right-2 top-16 z-40 flex flex-col gap-4 
+			className={`fixed w-72 h-24 right-2 top-16 z-40 flex flex-col gap-4 
 			p-0.5 bg-gradient-to-r from-blue-600 to-purple-600 inter tracking-wider 
 			rounded-bl-3xl rounded-tr-3xl translate-y-96 opacity-0 ${
 				timer && "transform-none opacity-100"

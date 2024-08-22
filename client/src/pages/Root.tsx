@@ -5,7 +5,6 @@ import { CSSTransition, SwitchTransition } from "react-transition-group";
 import BackgroundColumns from "../components/Root/BackgroundColumns";
 import BackgroundImages from "../components/Root/BackgroundImages";
 import AlertCenter from "../components/Root/AlertCenter";
-import CustomCursor from "../components/Root/CustomCursor";
 
 const Root = () => {
 	const currentOutlet = useOutlet();
@@ -16,13 +15,12 @@ const Root = () => {
 			className={`
 				min-h-dvh flex flex-col gap-4
 				text-white bg-neutral-950
-				transition-colors duration-300 relative cursor-none`}
+				transition-colors duration-300 relative`}
 		>
 			<BackgroundImages />
 			<BackgroundColumns />
 			<NavigationBar />
 			<AlertCenter />
-			<CustomCursor />
 			<div className="grow flex z-20">
 				{/* Content container */}
 				<div className="grow flex flex-col gap-4">
