@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from "../components/Reusable/Modal";
 import ResumeModalView from "../components/Resume/ResumeModalView";
 import ResumeInfo from "../components/Resume/ResumeInfo";
+import ResumeDisplay from "../components/Resume/ResumeDisplay";
 
 const ResumePage = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -25,11 +26,9 @@ const ResumePage = () => {
 			{/* Info */}
 			<ResumeInfo onViewClick={handleOpenModal} />
 			{/* PDF */}
-			<embed
-				className="hidden md:block w-3/5 aspect-[3/4]"
-				src="/src/assets/resume/xutao-gao-resume.pdf"
-				type="application/pdf"
-			/>
+			<div className="hidden lg:block w-3/5">
+				<ResumeDisplay />
+			</div>
 		</div>
 	);
 };

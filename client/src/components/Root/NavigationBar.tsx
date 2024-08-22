@@ -66,7 +66,7 @@ const NavigationBar = () => {
 	});
 
 	return (
-		<div className="h-10 flex justify-between gap-2 relative z-30 m-2">
+		<div className="h-10 flex justify-between gap-2 relative z-40 m-2">
 			<div className="grow flex gap-1 justify-between">
 				{/* Display navigation open button inside navigation bar when viewport width is below breakpoint */}
 				{!navBarBreakpointCheck && (

@@ -24,29 +24,31 @@ const Modal = ({ show, children, onClose }: modalProps) => {
 
 	return createPortal(
 		<div
-			className={`fixed inset-0 ${display} flex justify-center p-4 overflow-auto z-50`}
+			className={`fixed inset-0 ${display} flex justify-center p-4 z-50 overflow-auto text-white`}
 		>
 			{/* Background */}
 			<div
-				className="fixed inset-0 bg-black opacity-60"
+				className="fixed inset-0 bg-black/60 backdrop-blur-sm"
 				onClick={onClose}
 			></div>
 			{/* Content */}
 			<div
-				className="w-full max-w-[1024px] my-auto bg-white dark:bg-neutral-700 
-				flex flex-col p-4 pb-8 gap-4 rounded-sm text-black dark:text-white z-50"
+				className="w-full max-w-[1024px] my-auto p-0.5 rounded-sm
+				bg-gradient-to-r from-blue-600/60 to-purple-600/50 z-50"
 			>
 				{/* Close modal button */}
-				<button
-					className="flex gap-1 items-center self-start"
-					onClick={onClose}
-				>
-					<MdArrowBackIosNew />
-					<p className="poppins font-bold hover:underline underline-offset-4">
-						Close
-					</p>
-				</button>
-				{children}
+				<div className="size-full p-4 bg-neutral-950 flex flex-col gap-6 rounded-sm">
+					<button
+						className="flex gap-1 items-center self-start"
+						onClick={onClose}
+					>
+						<MdArrowBackIosNew />
+						<p className="inter tracking-wider font-semibold">
+							Close
+						</p>
+					</button>
+					{children}
+				</div>
 			</div>
 		</div>,
 		document.getElementById("root")!

@@ -30,6 +30,11 @@ body::-webkit-scrollbar {
 	outline: none;
 }
 
+/* Hide all scrollbars */
+*::-webkit-scrollbar {
+	display: none;
+}
+
 .anonymous-pro {
 	font-family: "Anonymous Pro", monospace;
 }

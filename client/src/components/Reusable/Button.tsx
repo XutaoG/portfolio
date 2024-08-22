@@ -27,7 +27,7 @@ const Button = ({
 			"bg-gradient-to-r from-blue-600/60 to-purple-600/60",
 			"inter tracking-widest",
 			{
-				"rounded-full": rounded,
+				"rounded-full px-3": rounded,
 				"basis-0 grow": fill,
 				"px-3 py-1 text-lg hover:scale-[1.05]": large,
 				"w-32": fixedWidth,

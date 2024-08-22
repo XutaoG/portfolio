@@ -17,7 +17,7 @@ const ResumeInfo = ({ onViewClick }: resumeInfoProps) => {
 	};
 
 	return (
-		<div className="w-full md:w-2/5 flex flex-col justify-center gap-12">
+		<div className="w-full lg:w-2/5 flex flex-col justify-center gap-12">
 			<DarkenedPanel className="flex flex-col gap-4 items-center">
 				<ScalingText
 					text="EXPERIENCE"

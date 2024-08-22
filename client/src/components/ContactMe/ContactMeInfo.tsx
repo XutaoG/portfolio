@@ -8,7 +8,7 @@ import ContactFormPanel from "./ContactFormPanel";
 
 const ContactMeInfo = () => {
 	return (
-		<div className="max-w-[640px] flex flex-col justify-center gap-12">
+		<div className="max-w-[1024px] flex flex-col justify-center gap-12">
 			<DarkenedPanel className="flex justify-between flex-wrap">
 				<ScalingText
 					text="CONTACT"

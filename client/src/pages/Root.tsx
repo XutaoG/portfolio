@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import BackgroundColumns from "../components/Root/BackgroundColumns";
 import BackgroundImages from "../components/Root/BackgroundImages";
-import AlertCenter from "../components/Root/AlertCenter";
+// import AlertCenter from "../components/Root/AlertCenter";
 
 const Root = () => {
 	const currentOutlet = useOutlet();
