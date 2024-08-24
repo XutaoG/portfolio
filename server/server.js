@@ -22,7 +22,11 @@ const mongodbUri = process.env.MONGODB_URI;
 // * Create Express app
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+	origin: ["https://portfolio-alpha-black-23.vercel.app"],
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
