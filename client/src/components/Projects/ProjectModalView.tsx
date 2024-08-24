@@ -6,7 +6,7 @@ import LoadingIndicator from "../Reusable/LoadingIndicator";
 import PhotoShuffler from "../Reusable/PhotoShuffler";
 import GradientBorderLabel from "../Reusable/GradientBorderLabel";
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 interface projectModalViewProps {
 	projectId: string;

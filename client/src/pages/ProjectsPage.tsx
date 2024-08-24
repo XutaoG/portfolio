@@ -12,7 +12,7 @@ import ProjectOverviewText from "../components/Projects/ProjectOverviewText";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../components/Reusable/GlowButton";
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const ProjectsPage = () => {
 	const navigate = useNavigate();
