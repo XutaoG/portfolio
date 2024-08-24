@@ -6,6 +6,8 @@ import LoadingIndicator from "../Reusable/LoadingIndicator";
 import PhotoShuffler from "../Reusable/PhotoShuffler";
 import GradientBorderLabel from "../Reusable/GradientBorderLabel";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 interface projectModalViewProps {
 	projectId: string;
 }
@@ -17,7 +19,7 @@ const ProjectModalView = ({ projectId }: projectModalViewProps) => {
 	const retrieveProjectById = useCallback(async () => {
 		setIsRetrieving(true);
 		const retrievedProject: Project = (
-			await axios.get(`http://localhost:4000/project/${projectId}`)
+			await axios.get(`${apiUrl}/project/${projectId}`)
 		).data;
 
 		setIsRetrieving(false);

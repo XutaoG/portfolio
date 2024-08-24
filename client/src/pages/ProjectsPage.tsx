@@ -12,6 +12,8 @@ import ProjectOverviewText from "../components/Projects/ProjectOverviewText";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../components/Reusable/GlowButton";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const ProjectsPage = () => {
 	const navigate = useNavigate();
 	const [showModal, setShowModal] = useState(false);
@@ -26,7 +28,7 @@ const ProjectsPage = () => {
 
 	const retrieveAllProjects = useCallback(async () => {
 		const retrievedProjects: Project[] = (
-			await axios.get("http://localhost:4000/project")
+			await axios.get(`${apiUrl}/project`)
 		).data;
 
 		setProjects(retrievedProjects);
