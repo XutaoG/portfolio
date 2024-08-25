@@ -23,7 +23,10 @@ const mongodbUri = process.env.MONGODB_URI;
 const app = express();
 
 const corsOptions = {
-	origin: ["https://portfolio-alpha-black-23.vercel.app"],
+	origin: [
+		"https://portfolio-alpha-black-23.vercel.app",
+		"https://xutaogao.com",
+	],
 };
 
 app.use(cors(corsOptions));
