@@ -4,6 +4,7 @@ import DarkenedPanel from "../Reusable/DarkenedPanel";
 import GlowButton from "../Reusable/GlowButton";
 import ScalingText from "../Reusable/ScalingText";
 import { useNavigate } from "react-router-dom";
+import resume from "../../assets/resume/xutao-gao-resume.pdf";
 
 interface resumeInfoProps {
 	onViewClick: () => void;
@@ -14,6 +15,15 @@ const ResumeInfo = ({ onViewClick }: resumeInfoProps) => {
 
 	const goToContact = () => {
 		navigate("/contact");
+	};
+
+	const downloadResume = () => {
+		const link = document.createElement("a");
+		link.href = resume;
+		link.download = "Xutao Gao Resume.pdf";
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
 	};
 
 	return (
@@ -45,7 +55,13 @@ const ResumeInfo = ({ onViewClick }: resumeInfoProps) => {
 					contribute to your team.
 				</p>
 				<div className="flex gap-4">
-					<Button text="Download" fill />
+					{/* <a
+						href={resume}
+						download="Xutao Gao Resume"
+						target="_blank"
+					> */}
+					<Button text="Download" onClick={downloadResume} fill />
+					{/* </a> */}
 					<Button text="View" onClick={onViewClick} fill />
 				</div>
 				{/* <p className="ibm-plex-mono self-end">Last Updated: 6/24</p> */}
