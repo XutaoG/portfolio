@@ -1,7 +1,7 @@
 import ScalingText from "../Reusable/ScalingText";
 import DarkenedPanel from "../Reusable/DarkenedPanel";
 import LinkedInPanel from "../AboutMe/LinkedInPanel";
-import ContactFormPanel from "./ContactFormPanel";
+// import ContactFormPanel from "./ContactFormPanel";
 import GitHubPanel from "../AboutMe/GitHubPanel";
 import PhoneNumberPanel from "../AboutMe/PhoneNumberPanel";
 import EmailPanel from "../AboutMe/EmailPanel";
@@ -26,12 +26,13 @@ const ContactMeInfo = () => {
 					reach out. You can contact me via email or connect with me
 					on LinkedIn or GitHub.
 				</p>
-				<p>
+				{/* <p>
 					For your convenience, there's also a contact form below.
 					Looking forward to connecting with you!
-				</p>
+				</p> */}
 			</DarkenedPanel>
-			<div className="grid grid-cols-2 grid-rows-7 md:grid-cols-5 md:grid-rows-7 gap-3 md:gap-5">
+			{/* <div className="grid grid-cols-2 grid-rows-7 md:grid-cols-5 md:grid-rows-7 gap-3 md:gap-5"> */}
+			<div className="grid grid-cols-2 grid-rows-2 md:grid-cols-5 md:grid-rows-2 gap-3 md:gap-5">
 				<div className="col-span-1 row-span-1 md:col-span-1 md:row-span-2">
 					<GitHubPanel />
 				</div>
@@ -44,9 +45,9 @@ const ContactMeInfo = () => {
 				<div className="col-span-2 row-span-1 md:col-span-4 md:row-span-1 h-24 md:h-32">
 					<EmailPanel />
 				</div>
-				<div className="col-span-2 row-span-5 md:col-span-5 md:row-span-5">
+				{/* <div className="col-span-2 row-span-5 md:col-span-5 md:row-span-5">
 					<ContactFormPanel />
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
