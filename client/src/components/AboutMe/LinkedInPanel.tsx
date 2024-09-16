@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import GlowPanel from "../Reusable/GlowPanel";
-import { useDispatch } from "react-redux";
-import { setAlert } from "../../store/slices/alertSlice";
 
 const LinkedInPanel = () => {
 	const [onHover, setOnHover] = useState(false);
-	const dispatch = useDispatch();
 
 	const onMouseEnter = () => {
 		setOnHover(true);
@@ -17,12 +14,9 @@ const LinkedInPanel = () => {
 	};
 
 	const openLink = () => {
-		dispatch(
-			setAlert({
-				message: "My LinkedIn will be available soon",
-				textStyle: "text-red-500",
-				expireTimer: 3000,
-			})
+		window.open(
+			"https://www.linkedin.com/in/xutao-gao-2a7346250/",
+			"_blank"
 		);
 	};
 
