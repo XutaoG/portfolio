@@ -8,7 +8,7 @@ const ResumeDisplay = () => {
 				src={`${resume}#view=FitH`}
 				type="application/pdf"
 			/>
-			<p className="inter tracking-wider self-end">Last Updated: 9/24</p>
+			<p className="inter tracking-wider self-end">Last Updated: 10/24</p>
 		</div>
 	);
 };
