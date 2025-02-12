@@ -45,7 +45,7 @@ const ProjectsPage = () => {
 	};
 
 	const sortedProjects = projects?.sort((project1, project2) => {
-		return new Date(project1.startDate).getTime() - new Date(project2.startDate).getTime();
+		return new Date(project2.startDate).getTime() - new Date(project1.startDate).getTime();
 	});
 
 	const renderedProjectTiles = sortedProjects?.map((project, index) => {
