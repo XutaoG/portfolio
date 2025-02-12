@@ -27,9 +27,7 @@ const ProjectsPage = () => {
 	const [projects, setProjects] = useState<Project[] | null>(null);
 
 	const retrieveAllProjects = useCallback(async () => {
-		const retrievedProjects: Project[] = (
-			await axios.get(`${apiUrl}/project`)
-		).data;
+		const retrievedProjects: Project[] = (await axios.get(`${apiUrl}/project`)).data;
 
 		setProjects(retrievedProjects);
 	}, []);
@@ -46,14 +44,12 @@ const ProjectsPage = () => {
 		setShowModal(false);
 	};
 
-	const renderedProjectTiles = projects?.map((project, index) => {
-		return (
-			<ProjectTile
-				key={index}
-				project={project}
-				handleOpenModal={handleOpenModal}
-			/>
-		);
+	const sortedProjects = projects?.sort((project1, project2) => {
+		return new Date(project1.startDate).getTime() - new Date(project2.startDate).getTime();
+	});
+
+	const renderedProjectTiles = sortedProjects?.map((project, index) => {
+		return <ProjectTile key={index} project={project} handleOpenModal={handleOpenModal} />;
 	});
 
 	return projects === null ? (
@@ -65,18 +61,14 @@ const ProjectsPage = () => {
 			<div className="w-full flex flex-col gap-2 lg:gap-4 sm:grid lg:grid-cols-2 2xl:grid-cols-3 bg-neutral-950">
 				{/* Modal */}
 				<Modal show={showModal} onClose={handleCloseModal}>
-					{openedProjectId == null || (
-						<ProjectModalView projectId={openedProjectId!} />
-					)}
+					{openedProjectId == null || <ProjectModalView projectId={openedProjectId!} />}
 				</Modal>
 				{renderedProjectTiles}
 			</div>
 			{/* Transition to Resume */}
 			<div className="flex flex-col gap-8 items-center">
 				<DarkenedPanel className="flex flex-col gap-4">
-					<p
-						className={`text-lg inter tracking-wider leading-7 font-light`}
-					>
+					<p className={`text-lg inter tracking-wider leading-7 font-light`}>
 						See what I've been up to?
 					</p>
 				</DarkenedPanel>
